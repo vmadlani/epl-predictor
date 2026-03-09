@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Table — ThirtyEight</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="index.html"><span class="logo-mark">38</span><span class="logo-word-light">Thirty</span><span class="logo-word-bold">Eight</span></a>
+    <nav class="site-nav" id="mainNav">
+      <a href="table.html" class="active">Table</a>
+      <a href="fixtures.html">Fixtures</a>
+      <a href="team-arsenal.html">Teams</a>
+      <a href="methodology.html">How It Works</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main class="page-body">
+<div class="container">
+
+  <div class="page-header">
+    <div class="eyebrow">ThirtyEight · 2025/26 Premier League</div>
+    <h1>Projected Final Standings</h1>
+    <p class="deck">Dixon-Coles model · 10,000 simulations · Updated after GW30.&ensp;P10 · Med · P90 = pessimistic / expected / optimistic final points.</p>
+  </div>
+
+  <!-- ZONE LEGEND -->
+  <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem;font-family:var(--fontMono);font-size:0.68rem;color:var(--gray5)">
+    <span><span style="display:inline-block;width:8px;height:8px;background:#6666ff;margin-right:4px;vertical-align:middle"></span>Champions League (top 4)</span>
+    <span><span style="display:inline-block;width:8px;height:8px;background:var(--teal);margin-right:4px;vertical-align:middle"></span>Europa League (5–6)</span>
+    <span><span style="display:inline-block;width:8px;height:8px;background:#c0392b;margin-right:4px;vertical-align:middle"></span>Relegation (bottom 3)</span>
+  </div>
+
+  <div class="league-table-wrap">
+    <table class="league-table" id="fullTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th style="text-align:left">Team</th>
+          <th>P</th>
+          <th>Pts</th>
+          <th class="hide-mobile">Left</th>
+          <th style="min-width:120px;text-align:center" class="hide-mobile">P10 · Med · P90</th>
+          <th>Title%</th>
+          <th>Top 4%</th>
+          <th class="hide-mobile hide-tablet">Top 6%</th>
+          <th>Rel%</th>
+          <th class="hide-mobile hide-tablet">Form</th>
+        </tr>
+      </thead>
+      <tbody id="fullTableBody"></tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:1rem;font-family:var(--fontMono);font-size:0.68rem;color:var(--gray5);line-height:1.7">
+    Probability bars are scaled relative to the maximum in each column. Click any row to view that team's schedule.
+  </div>
+
+</div>
+</main>
+
+<script src="data.js"></script>
+<script>
+const TEAM_COLORS = {
+  'Arsenal':'#EF0107','Man City':'#6CABDD','Aston Villa':'#95BFE5','Man United':'#DA291C',
+  'Chelsea':'#034694','Liverpool':'#C8102E','Brentford':'#D20000','Everton':'#003399',
+  'Newcastle':'#241F20','Bournemouth':'#DA291C','Sunderland':'#EB172B','Fulham':'#888',
+  'Brighton':'#0057B8','Crystal Palace':'#1B458F','Leeds':'#c9a800','Tottenham':'#132257',
+  "Nott'm Forest":'#DD0000','West Ham':'#7A263A','Burnley':'#6C1D45','Wolves':'#FDB913',
+};
+const TEAM_ABBR = {
+  'Arsenal':'ARS','Man City':'MCI','Aston Villa':'AVL','Man United':'MUN','Chelsea':'CHE',
+  'Liverpool':'LIV','Brentford':'BRE','Everton':'EVE','Newcastle':'NEW','Bournemouth':'BOU',
+  'Sunderland':'SUN','Fulham':'FUL','Brighton':'BHA','Crystal Palace':'CRY','Leeds':'LEE',
+  'Tottenham':'TOT',"Nott'm Forest":'NFO','West Ham':'WHU','Burnley':'BUR','Wolves':'WOL',
+};
+
+function badge(team,size=20) {
+  const c=TEAM_COLORS[team]||'#111';
+  const a=TEAM_ABBR[team]||team.slice(0,3).toUpperCase();
+  return `<div class="team-badge" style="width:${size}px;height:${size}px;background:${c};font-size:${size*.3}px">${a}</div>`;
+}
+function probBar(pct,type='black',maxP=100) {
+  const w = pct>0?Math.max(Math.round((pct/maxP)*52),2):0;
+  const fmt = pct===0?'<span style="color:var(--gray3)">—</span>':`${pct.toFixed(1)}%`;
+  return `<div class="prob-bar-wrap"><div class="prob-bar ${type}" style="width:${w}px"></div><span class="prob-val">${fmt}</span></div>`;
+}
+function formGuide(form) {
+  return '<div class="form-guide">'+form.map(r=>`<div class="form-sq ${r}">${r}</div>`).join('')+'</div>';
+}
+
+// Range indicator SVG inline
+function rangeBar(min,med,max) {
+  const allMins = SITE_DATA.projection.map(t=>t.projMin);
+  const allMaxs = SITE_DATA.projection.map(t=>t.projMax);
+  const gMin = Math.min(...allMins);
+  const gMax = Math.max(...allMaxs);
+  const sc = v => 8 + ((v-gMin)/(gMax-gMin))*94;
+  const x1=sc(min), xM=sc(med), x2=sc(max);
+  return `<div style="display:flex;align-items:center;gap:6px;justify-content:center">
+    <svg width="110" height="12" style="overflow:visible;flex-shrink:0">
+      <line x1="${x1}" y1="6" x2="${x2}" y2="6" stroke="#ccc" stroke-width="2"/>
+      <circle cx="${xM}" cy="6" r="3.5" fill="#111"/>
+    </svg>
+    <span style="font-family:var(--fontMono);font-size:0.72rem;white-space:nowrap">
+      <span style="color:var(--gray4)">${min}</span> <strong>${med}</strong> <span style="color:var(--gray4)">${max}</span>
+    </span>
+  </div>`;
+}
+
+const maxTitle = Math.max(...SITE_DATA.projection.map(t=>t.titlePct));
+const maxTop4  = Math.max(...SITE_DATA.projection.map(t=>t.top4Pct));
+const maxTop6  = Math.max(...SITE_DATA.projection.map(t=>t.top6Pct));
+const maxRel   = Math.max(...SITE_DATA.projection.map(t=>t.relegPct));
+
+const tbody = document.getElementById('fullTableBody');
+SITE_DATA.projection.forEach(t => {
+  const pos=t.pos;
+  const zone=pos<=4?'zone-cl':pos<=6?'zone-el':pos>=18?'zone-rel':'zone-none';
+  const isLeader=pos===1?'zone-leader':'';
+  const tr=document.createElement('tr');
+  tr.className=`${zone} ${isLeader}`;
+  tr.style.cursor='pointer';
+  tr.onclick=()=>window.location.href='team-arsenal.html';
+  tr.innerHTML=`
+    <td>${pos}</td>
+    <td><div class="team-cell">${badge(t.team)}<span class="team-name">${t.team}</span></div></td>
+    <td class="mono-cell">${t.played}</td>
+    <td class="mono-cell" style="font-weight:700">${t.currentPts}</td>
+    <td class="mono-cell hide-mobile">${t.remaining}</td>
+    <td class="hide-mobile">${rangeBar(t.projMin,t.projMed,t.projMax)}</td>
+    <td class="prob-bar-cell">${probBar(t.titlePct,'gold',maxTitle||100)}</td>
+    <td class="prob-bar-cell">${probBar(t.top4Pct,'black',maxTop4||100)}</td>
+    <td class="prob-bar-cell hide-mobile hide-tablet">${probBar(t.top6Pct,'teal',maxTop6||100)}</td>
+    <td class="prob-bar-cell">${probBar(t.relegPct,'red',maxRel||100)}</td>
+    <td class="hide-mobile hide-tablet">${formGuide(t.form)}</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+window.addEventListener('load', () => {
+  document.querySelectorAll('.prob-bar').forEach(b => {
+    const w=b.style.width; b.style.width='0';
+    setTimeout(()=>{b.style.width=w;},80);
+  });
+});
+
+document.getElementById('navToggle').addEventListener('click',()=>{
+  document.getElementById('mainNav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

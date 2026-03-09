@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand — ThirtyEight</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .brand-section { margin-bottom: 3.5rem; }
+  .swatch-row { display: flex; gap: 0; flex-wrap: wrap; }
+  .swatch {
+    width: 120px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0.5rem 0.6rem;
+    flex-shrink: 0;
+  }
+  .swatch .sw-hex { font-family: var(--fontMono); font-size: 0.68rem; font-weight: 600; }
+  .swatch .sw-name { font-size: 0.68rem; margin-top: 1px; }
+  .swatch.dark .sw-hex, .swatch.dark .sw-name { color: rgba(255,255,255,0.75); }
+  .swatch.light .sw-hex, .swatch.light .sw-name { color: rgba(0,0,0,0.5); }
+
+  .type-row { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--gray3); }
+  .type-row:last-child { border-bottom: none; }
+  .type-label { font-family: var(--fontMono); font-size: 0.65rem; color: var(--gray5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+
+  .logo-demos { display: flex; flex-direction: column; gap: 1.5rem; }
+  .logo-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--gray3);
+  }
+  .logo-demo.dark { background: var(--black); }
+  .logo-demo.mid  { background: var(--gray1); }
+
+  /* Standalone large logo for the demo */
+  .logo-large {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .logo-large .mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 32px;
+    background: #E8521C;
+    color: #fff;
+    font-family: var(--fontMono);
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 2px;
+    letter-spacing: 0.02em;
+  }
+  .logo-large .wordmark {
+    font-size: 1.45rem;
+    line-height: 1;
+  }
+  .logo-large .w-light { font-weight: 300; color: rgba(255,255,255,0.7); }
+  .logo-large .w-bold  { font-weight: 700; color: #fff; }
+  .logo-large.on-white .w-light { color: var(--gray5); }
+  .logo-large.on-white .w-bold  { color: var(--black); }
+
+  .usage-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  .usage-table th { font-family: var(--fontMono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray5); padding: 0.4rem 0.6rem; text-align: left; border-bottom: 2px solid var(--black); }
+  .usage-table td { padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--gray3); vertical-align: top; }
+  .usage-table td:first-child { font-weight: 600; width: 30%; }
+  .usage-table code { font-family: var(--fontMono); font-size: 0.8rem; background: var(--gray1); padding: 0.1rem 0.3rem; border: 1px solid var(--gray3); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="index.html">
+      <span class="logo-mark">38</span>
+      <span class="logo-word-light">Thirty</span><span class="logo-word-bold">Eight</span>
+    </a>
+    <nav class="site-nav">
+      <a href="table.html">Table</a>
+      <a href="fixtures.html">Fixtures</a>
+      <a href="team-arsenal.html">Teams</a>
+      <a href="methodology.html">How It Works</a>
+      <a href="brand.html" class="active">Brand</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page-body">
+<div class="container">
+
+  <div class="page-header">
+    <div class="eyebrow">ThirtyEight · Identity</div>
+    <h1>Brand Reference</h1>
+    <p class="deck">The complete visual language for ThirtyEight. Simple, rigorous, data-first.</p>
+  </div>
+
+  <!-- LOGO -->
+  <div class="brand-section">
+    <div class="section-label">Logotype</div>
+    <div class="logo-demos">
+      <div class="logo-demo dark">
+        <div class="logo-large">
+          <div class="mark">38</div>
+          <div class="wordmark">
+            <span class="w-light">Thirty</span><span class="w-bold">Eight</span>
+          </div>
+        </div>
+      </div>
+      <div class="logo-demo mid">
+        <div class="logo-large on-white">
+          <div class="mark">38</div>
+          <div class="wordmark" style="font-size:1.45rem">
+            <span style="font-weight:300;color:var(--gray5)">Thirty</span><span style="font-weight:700;color:var(--black)">Eight</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:1rem;font-family:var(--fontMono);font-size:0.72rem;color:var(--gray5);line-height:2">
+      The mark is always <code>#E8521C</code> on any background colour. The wordmark is always split-weight: "Thirty" in IBM Plex Sans 300, "Eight" in IBM Plex Sans 700. Never use bold for "Thirty" or light for "Eight".
+    </div>
+  </div>
+
+  <!-- COLOUR PALETTE -->
+  <div class="brand-section">
+    <div class="section-label">Colour palette</div>
+    <div class="swatch-row" style="margin-bottom:1rem">
+      <!-- Brand -->
+      <div class="swatch dark" style="background:#E8521C">
+        <div class="sw-hex">#E8521C</div>
+        <div class="sw-name">Brand Orange</div>
+      </div>
+      <div class="swatch dark" style="background:#111111">
+        <div class="sw-hex">#111111</div>
+        <div class="sw-name">Black</div>
+      </div>
+      <div class="swatch light" style="background:#FFFFFF;border:1px solid #ddd">
+        <div class="sw-hex">#FFFFFF</div>
+        <div class="sw-name">White</div>
+      </div>
+      <div class="swatch light" style="background:#F7F7F7;border:1px solid #ddd">
+        <div class="sw-hex">#F7F7F7</div>
+        <div class="sw-name">Gray 1 (bg tint)</div>
+      </div>
+      <div class="swatch light" style="background:#888888">
+        <div class="sw-hex sw-hex" style="color:rgba(0,0,0,0.5)">#888888</div>
+        <div class="sw-name" style="color:rgba(0,0,0,0.5)">Gray (labels)</div>
+      </div>
+    </div>
+    <div class="swatch-row">
+      <!-- Data colours -->
+      <div class="swatch dark" style="background:#52b788">
+        <div class="sw-hex">#52b788</div>
+        <div class="sw-name">Win Green</div>
+      </div>
+      <div class="swatch light" style="background:#856404">
+        <div class="sw-hex" style="color:rgba(255,255,255,0.85)">#856404</div>
+        <div class="sw-name" style="color:rgba(255,255,255,0.85)">Draw Amber</div>
+      </div>
+      <div class="swatch dark" style="background:#c0392b">
+        <div class="sw-hex">#c0392b</div>
+        <div class="sw-name">Loss Red</div>
+      </div>
+      <div class="swatch dark" style="background:#007B89">
+        <div class="sw-hex">#007B89</div>
+        <div class="sw-name">Teal (Top 6)</div>
+      </div>
+      <div class="swatch dark" style="background:#F9A01B">
+        <div class="sw-hex">#F9A01B</div>
+        <div class="sw-name">Gold (Title%)</div>
+      </div>
+    </div>
+    <div style="margin-top:0.75rem;font-family:var(--fontMono);font-size:0.72rem;color:var(--gray5);line-height:2">
+      Brand Orange appears only on the 38 mark and the active filter button. Data colours appear only inside table cells and probability bars — never as page chrome. The site UI is otherwise black, white, and grays only.
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="brand-section">
+    <div class="section-label">Typography</div>
+    <div class="type-row">
+      <div class="type-label">Page header / H1 — IBM Plex Sans 700, 1.6rem</div>
+      <h1 style="font-size:1.6rem;font-weight:700;line-height:1.2">Projected Final Standings</h1>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Section label — IBM Plex Mono 600, 0.68rem, uppercase +0.12em tracking</div>
+      <div style="font-family:var(--fontMono);font-size:0.68rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray5)">Gameweek 30 — Upcoming Fixtures</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body — IBM Plex Sans 400, 0.9375rem</div>
+      <p>Dixon-Coles is a statistical model for predicting football match scores. Each team has two numbers — an attack rating and a defence rating — and the model uses these to estimate expected goals.</p>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Data / numbers — IBM Plex Mono 400–600, various sizes</div>
+      <div style="font-family:var(--fontMono);font-size:1.2rem;font-weight:700">1–0 &ensp; 62.2% &ensp; 84 pts &ensp; 1.66 xG</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Eyebrow — IBM Plex Mono 600, 0.68rem, uppercase</div>
+      <div style="font-family:var(--fontMono);font-size:0.68rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray5)">ThirtyEight · 2025/26 Premier League</div>
+    </div>
+  </div>
+
+  <!-- USAGE RULES -->
+  <div class="brand-section">
+    <div class="section-label">Usage rules</div>
+    <table class="usage-table">
+      <thead><tr><th>Element</th><th>Rule</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>38 mark</td>
+          <td>Always <code>#E8521C</code>. Never outlined, never on a coloured background other than black.</td>
+        </tr>
+        <tr>
+          <td>Wordmark weight</td>
+          <td>"Thirty" is always 300 (light), "Eight" is always 700 (bold). Never reverse these.</td>
+        </tr>
+        <tr>
+          <td>Page backgrounds</td>
+          <td>White (<code>#FFFFFF</code>) for content, black (<code>#111</code>) for the nav only. No gradients.</td>
+        </tr>
+        <tr>
+          <td>Colour in UI</td>
+          <td>Brand orange is used only on the 38 mark and active filter state. All other UI chrome is black, white, or gray.</td>
+        </tr>
+        <tr>
+          <td>Colour in data</td>
+          <td>Win/draw/loss cells, probability bars, zone borders, and the score matrix heatmap may use the data colour palette. These are data signals — not decoration.</td>
+        </tr>
+        <tr>
+          <td>Pie charts</td>
+          <td>Never. Horizontal bars only for probabilities.</td>
+        </tr>
+        <tr>
+          <td>Photography</td>
+          <td>None. Data and type do the visual work.</td>
+        </tr>
+        <tr>
+          <td>Tagline</td>
+          <td>"Premier League predictions, model-driven." Use in sub-headings and social profiles.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- NAME RATIONALE -->
+  <div class="brand-section">
+    <div class="section-label">Name rationale</div>
+    <div class="callout" style="max-width:580px">
+      <strong>Why ThirtyEight?</strong> A Premier League season is 38 gameweeks. Every number on this site — every projected points total, every title probability, every relegation percentage — is the product of reasoning about all 38. The name follows the same logic as FiveThirtyEight: a specific, meaningful number that only makes sense once you understand the subject, and that sounds unexpectedly cool to everyone else.
+    </div>
+  </div>
+
+</div>
+</main>
+</body>
+</html>
