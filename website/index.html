@@ -5,6 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ThirtyEight — Premier League Predictions</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* Sub-label for CL / relegation sections — matches .section-label but with colour accent */
+  .race-zone-label {
+    font-family: var(--fontMono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.45rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+  .race-zone-label.ucl { background: #6666ff; color: #fff; }
+  .race-zone-label.uel { background: var(--teal); color: #fff; }
+  .race-zone-label.rel { background: var(--lossRed); color: #fff; }
+
+  /* Safety-line divider inside relegation list */
+  .race-cutoff {
+    font-family: var(--fontMono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray4);
+    text-align: right;
+    padding: 0.25rem 0;
+    border-top: 1px dashed var(--gray3);
+  }
+
+  /* CL / relegation bar colours */
+  .tr-bar.cl  { background: #6666ff; }
+  .tr-bar.rel { background: #c0392b; }
+</style>
 </head>
 <body>
 
@@ -15,8 +47,6 @@
       <a href="table.html">Table</a>
       <a href="fixtures.html">Fixtures</a>
       <a href="teams.html">Teams</a>
-      <a href="champions-league.html">CL Race</a>
-      <a href="relegation.html">Relegation</a>
       <a href="methodology.html">How It Works</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
@@ -29,7 +59,7 @@
   <!-- LEDE -->
   <div class="home-lede">
     <div class="eyebrow" id="homeEyebrow">ThirtyEight · 2025/26 Premier League · GW30</div>
-    <h1>Arsenal are <span class="accent" id="heroTitlePct">90.5%</span> to win the title.</h1>
+    <h1><span id="heroTeam">Arsenal</span> are <span class="accent" id="heroTitlePct">90.5%</span> to win the title.</h1>
     <p class="sub">Premier League predictions, model-driven. Updated weekly after each gameweek.</p>
     <div class="headline-stats" id="headlineStats">
       <div class="headline-stat">
@@ -37,16 +67,16 @@
         <div class="stat-label">Title probability</div>
       </div>
       <div class="headline-stat">
-        <div class="stat-num" id="statCity">Man City 9.5%</div>
-        <div class="stat-label">City's title chance</div>
+        <div class="stat-num" id="statChallenger">Man City 9.5%</div>
+        <div class="stat-label" id="statChallengerLbl">Closest challenger</div>
       </div>
       <div class="headline-stat">
         <div class="stat-num red" id="statRel">Wolves 99.9%</div>
         <div class="stat-label">Highest relegation risk</div>
       </div>
       <div class="headline-stat">
-        <div class="stat-num" id="statGap">7 pts</div>
-        <div class="stat-label">Arsenal lead, 8 games left</div>
+        <div class="stat-num" id="statCLBubble">—</div>
+        <div class="stat-label" id="statCLBubbleLbl">4th place CL chance</div>
       </div>
     </div>
   </div>
@@ -54,7 +84,7 @@
   <!-- UPCOMING FIXTURES -->
   <section class="section">
     <div class="section-label">
-      <span>Gameweek 30 — Upcoming Fixtures</span>
+      <span id="fixtureLabel">Upcoming Fixtures</span>
       <a href="fixtures.html">All fixtures →</a>
     </div>
     <div class="fixture-strip" id="fixtureStrip"></div>
@@ -67,6 +97,23 @@
       <a href="table.html">Full table →</a>
     </div>
     <div class="title-race-wrap" id="titleRaceRows"></div>
+  </section>
+
+  <!-- CHAMPIONS LEAGUE RACE -->
+  <section class="section">
+    <div class="section-label">
+      <span>Champions League Race</span>
+      <a href="teams.html">All teams →</a>
+    </div>
+    <div class="title-race-wrap" id="clRaceRows"></div>
+  </section>
+
+  <!-- RELEGATION BATTLE -->
+  <section class="section">
+    <div class="section-label">
+      <span>Relegation Battle</span>
+    </div>
+    <div class="title-race-wrap" id="relRaceRows"></div>
   </section>
 
   <!-- PROJECTED TABLE (TOP 6 + BOTTOM 3) -->
@@ -119,18 +166,15 @@ function badge(team, size=20) {
   const a = TEAM_ABBR[team] || team.slice(0,3).toUpperCase();
   return `<div class="team-badge" style="width:${size}px;height:${size}px;background:${c};font-size:${size*.3}px">${a}</div>`;
 }
-
 function probBar(pct, type='black', maxP=100) {
   const maxW = 52;
   const w = pct > 0 ? Math.max(Math.round((pct/maxP)*maxW), 2) : 0;
   const fmt = pct === 0 ? '<span style="color:var(--gray3)">—</span>' : `${pct.toFixed(1)}%`;
   return `<div class="prob-bar-wrap"><div class="prob-bar ${type}" style="width:${w}px"></div><span class="prob-val">${fmt}</span></div>`;
 }
-
 function formGuide(form) {
   return '<div class="form-guide">' + form.map(r=>`<div class="form-sq ${r}">${r}</div>`).join('') + '</div>';
 }
-
 function hdaBar(h,d,a) {
   return `<div class="fixture-hda-bar"><div class="hda-h" style="flex:${h}"></div><div class="hda-d" style="flex:${d}"></div><div class="hda-a" style="flex:${a}"></div></div>`;
 }
@@ -138,18 +182,33 @@ function hdaBar(h,d,a) {
 const data = SITE_DATA;
 const GW_KEY = Object.keys(SITE_DATA).find(k => /^gw\d+$/.test(k));
 const GW_NUM = GW_KEY ? parseInt(GW_KEY.replace('gw','')) : '';
+
+// ── Lede ─────────────────────────────────────────────────────────────────────
 document.getElementById('homeEyebrow').textContent = 'ThirtyEight · 2025/26 Premier League · ' + SITE_DATA.lastUpdated;
-const leader = data.projection[0];
-const city   = data.projection.find(t=>t.team==='Man City');
-const topRel = [...data.projection].sort((a,b)=>b.relegPct-a.relegPct)[0];
 
-// Lede
-document.getElementById('heroTitlePct').textContent = leader.titlePct.toFixed(1) + '%';
-document.getElementById('statLeader').textContent = `${leader.team} ${leader.titlePct.toFixed(1)}%`;
-document.getElementById('statCity').textContent   = `Man City ${city.titlePct.toFixed(1)}%`;
-document.getElementById('statRel').textContent    = `${topRel.team} ${topRel.relegPct.toFixed(1)}%`;
+const leader     = data.projection[0];
+const second     = data.projection[1];
+const fourth     = data.projection[3]; // 4th place
+const topRel     = [...data.projection].sort((a,b)=>b.relegPct-a.relegPct)[0];
+const leaderGap  = leader.currentPts - second.currentPts;
+const gamesLeft  = leader.remaining;
 
-// Fixture strip
+document.getElementById('heroTeam').textContent      = leader.team;
+document.getElementById('heroTitlePct').textContent  = leader.titlePct.toFixed(1) + '%';
+document.getElementById('statLeader').textContent    = `${leader.team} ${leader.titlePct.toFixed(1)}%`;
+document.getElementById('statChallenger').textContent = `${second.team} ${second.titlePct.toFixed(1)}%`;
+document.getElementById('statChallengerLbl').textContent = `Closest challenger`;
+document.getElementById('statRel').textContent       = `${topRel.team} ${topRel.relegPct.toFixed(1)}%`;
+document.getElementById('statCLBubble').textContent  = `${fourth.team} ${fourth.top4Pct.toFixed(0)}%`;
+document.getElementById('statCLBubbleLbl').textContent = `4th place — CL spot`;
+
+// Gap stat subtitle
+if (leaderGap > 0) {
+  document.getElementById('statGap') && (document.getElementById('statGap').textContent = `${leaderGap} pts`);
+}
+
+// ── Fixture strip ─────────────────────────────────────────────────────────────
+document.getElementById('fixtureLabel').textContent = `GW${GW_NUM} — Upcoming Fixtures`;
 const strip = document.getElementById('fixtureStrip');
 data[GW_KEY].forEach(f => {
   const maxP = Math.max(f.homeWin, f.draw, f.awayWin);
@@ -167,13 +226,15 @@ data[GW_KEY].forEach(f => {
   strip.appendChild(d);
 });
 
-// Title race
+// ── Title race ────────────────────────────────────────────────────────────────
 const raceEl = document.getElementById('titleRaceRows');
-const contenders = data.projection.filter(t => t.titlePct > 0 || t.top4Pct > 60);
-contenders.forEach((t,i) => {
+const titleContenders = data.projection.filter(t => t.titlePct > 0 || t.top4Pct > 60);
+titleContenders.forEach((t,i) => {
   const isLeader = i===0;
   const row = document.createElement('div');
   row.className = 'title-race-row';
+  row.style.cursor = 'pointer';
+  row.onclick = () => window.location.href = `team.html?team=${encodeURIComponent(t.team)}`;
   row.innerHTML = `
     ${badge(t.team, 22)}
     <span class="tr-team">${t.team}</span>
@@ -184,7 +245,90 @@ contenders.forEach((t,i) => {
   raceEl.appendChild(row);
 });
 
-// Home table
+// ── Champions League race ─────────────────────────────────────────────────────
+const clEl = document.getElementById('clRaceRows');
+// Show teams with a realistic shot at top 4 (>2%), plus always show 4th & 5th
+const clContenders = data.projection.filter(t => t.top4Pct > 2).slice(0, 8);
+const maxCL = Math.max(...clContenders.map(t => t.top4Pct));
+
+clContenders.forEach((t, i) => {
+  const inZone = t.pos <= 4;
+
+  // Insert "cut-off" divider between 4th and 5th
+  if (i > 0 && inZone !== (clContenders[i-1].pos <= 4)) {
+    const cutoff = document.createElement('div');
+    cutoff.className = 'race-cutoff';
+    cutoff.textContent = '— top 4 cut-off —';
+    clEl.appendChild(cutoff);
+  }
+
+  const row = document.createElement('div');
+  row.className = 'title-race-row';
+  row.style.cursor = 'pointer';
+  row.onclick = () => window.location.href = `team.html?team=${encodeURIComponent(t.team)}`;
+
+  // Zone label (UCL / UEL)
+  const zoneTag = inZone
+    ? `<span class="race-zone-label ucl">UCL</span>`
+    : (t.pos <= 6 ? `<span class="race-zone-label uel">UEL</span>` : '');
+
+  row.innerHTML = `
+    ${badge(t.team, 22)}
+    <span class="tr-team">${t.team}</span>
+    <span class="tr-pts hide-mobile" style="min-width:60px">${t.currentPts} pts · ${t.remaining} left</span>
+    <div class="tr-bar-wrap"><div class="tr-bar cl" style="width:${Math.max(t.top4Pct/maxCL*100,0.5)}%"></div></div>
+    <span class="tr-pct">${t.top4Pct.toFixed(1)}%</span>
+    ${zoneTag}
+  `;
+  clEl.appendChild(row);
+});
+
+// ── Relegation battle ─────────────────────────────────────────────────────────
+const relEl = document.getElementById('relRaceRows');
+// Teams in or near the relegation zone
+const relContenders = data.projection.filter(t => t.relegPct > 1).slice(-8);
+const maxRel2 = Math.max(...relContenders.map(t => t.relegPct));
+const safetyPts = data.projection[16]?.currentPts ?? 0; // 17th place is safety line
+
+let shownRelCutoff = false;
+relContenders.forEach((t, i) => {
+  const inZone = t.pos >= 18;
+
+  // Insert divider at 17th/18th boundary
+  if (!shownRelCutoff && inZone) {
+    const cutoff = document.createElement('div');
+    cutoff.className = 'race-cutoff';
+    cutoff.textContent = '— relegation zone —';
+    cutoff.style.borderColor = '#f5c6cb';
+    relEl.appendChild(cutoff);
+    shownRelCutoff = true;
+  }
+
+  const row = document.createElement('div');
+  row.className = 'title-race-row';
+  row.style.cursor = 'pointer';
+  if (inZone) row.style.background = '#fff8f8';
+  row.onclick = () => window.location.href = `team.html?team=${encodeURIComponent(t.team)}`;
+
+  const gapToSafety = t.currentPts - safetyPts;
+  const gapText = inZone
+    ? `<span style="font-family:var(--fontMono);font-size:0.68rem;color:var(--lossRed);min-width:70px;text-align:right">${gapToSafety} pts</span>`
+    : (gapToSafety === 0
+        ? `<span style="font-family:var(--fontMono);font-size:0.68rem;color:#856404;min-width:70px;text-align:right">Safety line</span>`
+        : `<span style="font-family:var(--fontMono);font-size:0.68rem;color:var(--gray5);min-width:70px;text-align:right" class="hide-mobile">+${gapToSafety} pts</span>`);
+
+  row.innerHTML = `
+    ${badge(t.team, 22)}
+    <span class="tr-team" style="${inZone?'font-weight:700':''}">${t.team}</span>
+    <span class="tr-pts">${t.currentPts} pts</span>
+    <div class="tr-bar-wrap"><div class="tr-bar rel" style="width:${Math.max(t.relegPct/maxRel2*100,0.5)}%"></div></div>
+    <span class="tr-pct" style="color:${t.relegPct>50?'var(--lossRed)':t.relegPct>15?'#856404':'var(--nearBlack)'}">${t.relegPct.toFixed(1)}%</span>
+    ${gapText}
+  `;
+  relEl.appendChild(row);
+});
+
+// ── Projected standings table (top 6 + bottom 3) ──────────────────────────────
 const tbody = document.getElementById('homeTableBody');
 const rows = [...data.projection.slice(0,6), ...data.projection.slice(-3)];
 const maxTitle = Math.max(...data.projection.map(t=>t.titlePct));
@@ -223,7 +367,7 @@ rows.forEach((t, idx) => {
   tbody.appendChild(tr);
 });
 
-// Animate bars
+// ── Animate bars ──────────────────────────────────────────────────────────────
 window.addEventListener('load', () => {
   document.querySelectorAll('.prob-bar').forEach(b => {
     const w = b.style.width; b.style.width='0';
