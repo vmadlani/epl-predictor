@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team — ThirtyEight</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="index.html"><span class="logo-mark">38</span><span class="logo-word-light">Thirty</span><span class="logo-word-bold">Eight</span></a>
+    <nav class="site-nav" id="mainNav">
+      <a href="table.html">Table</a>
+      <a href="fixtures.html">Fixtures</a>
+      <a href="teams.html" class="active">Teams</a>
+      <a href="champions-league.html">CL Race</a>
+      <a href="relegation.html">Relegation</a>
+      <a href="methodology.html">How It Works</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main class="page-body">
+<div class="container" id="pageContent">
+
+  <!-- content injected by JS below -->
+
+</div>
+</main>
+
+<script src="data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+const TEAM_ABBR = {
+  'Arsenal':'ARS','Man City':'MCI','Aston Villa':'AVL','Man United':'MUN','Chelsea':'CHE',
+  'Liverpool':'LIV','Brentford':'BRE','Everton':'EVE','Newcastle':'NEW','Bournemouth':'BOU',
+  'Sunderland':'SUN','Fulham':'FUL','Brighton':'BHA','Crystal Palace':'CRY','Leeds':'LEE',
+  'Tottenham':'TOT',"Nott'm Forest":'NFO','West Ham':'WHU','Burnley':'BUR','Wolves':'WOL',
+};
+const TEAM_COLORS = {
+  'Arsenal':'#EF0107','Man City':'#6CABDD','Aston Villa':'#95BFE5','Man United':'#DA291C',
+  'Chelsea':'#034694','Liverpool':'#C8102E','Brentford':'#D20000','Everton':'#003399',
+  'Newcastle':'#241F20','Bournemouth':'#DA291C','Sunderland':'#EB172B','Fulham':'#888',
+  'Brighton':'#0057B8','Crystal Palace':'#1B458F','Leeds':'#c9a800','Tottenham':'#132257',
+  "Nott'm Forest":'#DD0000','West Ham':'#7A263A','Burnley':'#6C1D45','Wolves':'#FDB913',
+};
+
+function badge(team, size=18) {
+  const c = TEAM_COLORS[team] || '#111';
+  const a = TEAM_ABBR[team] || team.slice(0,3).toUpperCase();
+  return `<div class="team-badge" style="width:${size}px;height:${size}px;background:${c};font-size:${size*.3}px;border-radius:2px">${a}</div>`;
+}
+
+// ── Parse team from URL param ─────────────────────────────────────────────────
+const params = new URLSearchParams(window.location.search);
+const TEAM   = params.get('team') || 'Arsenal';
+const abbr   = TEAM_ABBR[TEAM] || TEAM.slice(0,3).toUpperCase();
+const color  = TEAM_COLORS[TEAM] || '#111';
+
+const teamProj = SITE_DATA.projection.find(t => t.team === TEAM);
+const teamFx   = SITE_DATA.teamFixtures[TEAM];
+const histData  = SITE_DATA.teamHist && SITE_DATA.teamHist[TEAM]
+                 ? SITE_DATA.teamHist[TEAM]
+                 : (TEAM === 'Arsenal' ? SITE_DATA.arsenalHist : []);
+const histStats = SITE_DATA.teamHistStats && SITE_DATA.teamHistStats[TEAM]
+                 ? SITE_DATA.teamHistStats[TEAM]
+                 : (TEAM === 'Arsenal' ? SITE_DATA.arsenalHistStats : {median:0,p10:0,p90:0});
+
+// Update page title
+document.title = `${TEAM} — ThirtyEight`;
+
+const container = document.getElementById('pageContent');
+
+if (!teamProj || !teamFx) {
+  container.innerHTML = `
+    <div style="padding:4rem 0;text-align:center">
+      <div style="font-family:var(--fontMono);color:var(--gray5);margin-bottom:1rem">Team not found</div>
+      <a href="teams.html" style="font-family:var(--fontMono);font-size:0.8rem;color:var(--brand)">← Back to all teams</a>
+    </div>`;
+} else {
+
+  // ── Inject HTML structure ────────────────────────────────────────────────────
+  const ordinal = n => {
+    const s = ['th','st','nd','rd'], v = n%100;
+    return n + (s[(v-20)%10] || s[v] || s[0]);
+  };
+
+  const expWins = teamFx.reduce((s,f) => s + f.winPct/100, 0);
+
+  container.innerHTML = `
+    <!-- BACK LINK -->
+    <div style="padding:0.75rem 0 0;font-family:var(--fontMono);font-size:0.72rem">
+      <a href="teams.html" style="color:var(--gray5)">← All teams</a>
+    </div>
+
+    <!-- TEAM HEADER -->
+    <div class="team-header">
+      <div class="team-header-top">
+        <div class="team-badge-large" style="background:${color}">${abbr}</div>
+        <div>
+          <h1>${TEAM}</h1>
+          <div class="pos-line">${ordinal(teamProj.pos)} · ${teamProj.played} played · ${teamProj.currentPts} pts</div>
+        </div>
+      </div>
+      <div class="team-proj-line">
+        Projected to finish on <strong>${teamProj.projMed} pts</strong> — range <strong>${histStats.p10}–${histStats.p90}</strong> across 10,000 simulations
+      </div>
+      <div class="team-stats-row">
+        <div class="team-stat">
+          <div class="val" id="statTitle">${teamProj.titlePct.toFixed(1)}%</div>
+          <div class="lbl">Title probability</div>
+        </div>
+        <div class="team-stat">
+          <div class="val" id="statTop4">${teamProj.top4Pct.toFixed(1)}%</div>
+          <div class="lbl">Top 4 probability</div>
+        </div>
+        <div class="team-stat">
+          <div class="val">${expWins.toFixed(1)} / ${teamFx.length}</div>
+          <div class="lbl">Expected wins left</div>
+        </div>
+        <div class="team-stat">
+          <div class="val">
+            <div class="form-guide" id="teamForm" style="gap:3px"></div>
+          </div>
+          <div class="lbl">Last 5 results</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POINTS DISTRIBUTION -->
+    ${histData.length ? `
+    <section class="section">
+      <div class="section-label">Points distribution — 10,000 simulations</div>
+      <div class="histogram-wrap">
+        <div id="histTooltip" class="hist-tooltip"></div>
+        <svg id="histSvg" style="display:block;width:100%"></svg>
+        <div style="font-family:var(--fontMono);font-size:0.65rem;color:var(--gray5);margin-top:0.5rem;display:flex;gap:1.5rem;flex-wrap:wrap">
+          <span><span style="display:inline-block;width:10px;height:10px;background:var(--gray4);margin-right:4px;vertical-align:middle"></span>P10–P90 range</span>
+          <span><span style="display:inline-block;width:1.5px;height:10px;background:var(--black);margin-right:4px;vertical-align:middle;display:inline-block"></span>Median</span>
+        </div>
+      </div>
+    </section>` : ''}
+
+    <!-- REMAINING FIXTURES -->
+    <section class="section">
+      <div class="section-label">
+        <span>Remaining fixtures — <span id="fxCount">${teamFx.length}</span> games</span>
+        <span style="font-family:var(--fontMono);font-size:0.65rem;color:var(--gray5)">Click row to expand</span>
+      </div>
+      <div class="league-table-wrap">
+        <table class="team-fixture-table" id="teamFixtureTable">
+          <thead>
+            <tr>
+              <th style="width:32px">GW</th>
+              <th style="width:32px">H/A</th>
+              <th>Opponent</th>
+              <th class="hide-mobile">Pred</th>
+              <th>Win%</th>
+              <th>Draw%</th>
+              <th>Loss%</th>
+              <th>xPts</th>
+            </tr>
+          </thead>
+          <tbody id="fixtureBody"></tbody>
+        </table>
+      </div>
+    </section>
+  `;
+
+  // ── Render form guide ─────────────────────────────────────────────────────────
+  teamProj.form.forEach(r => {
+    const sq = document.createElement('div');
+    sq.className = `form-sq ${r}`;
+    sq.style.cssText = 'width:16px;height:16px;font-size:0.55rem';
+    sq.textContent = r;
+    document.getElementById('teamForm').appendChild(sq);
+  });
+
+  // ── Histogram ─────────────────────────────────────────────────────────────────
+  function drawHistogram() {
+    if (!histData.length) return;
+    const wrap = document.getElementById('histSvg').parentElement;
+    const W = wrap.clientWidth || 760;
+    const H = 160;
+    const m = {top:18,right:16,bottom:34,left:36};
+    const iW = W-m.left-m.right, iH = H-m.top-m.bottom;
+
+    const svg = d3.select('#histSvg').attr('width',W).attr('height',H);
+    svg.selectAll('*').remove();
+    const g = svg.append('g').attr('transform',`translate(${m.left},${m.top})`);
+
+    const pts = histData.map(d => d.pts);
+    const ptMin = d3.min(pts)-0.5, ptMax = d3.max(pts)+0.5;
+    const x = d3.scaleLinear().domain([ptMin,ptMax]).range([0,iW]);
+    const y = d3.scaleLinear().domain([0,d3.max(histData,d=>d.count)]).nice().range([iH,0]);
+    const bw = (iW/(ptMax-ptMin))*0.82;
+    const peak = d3.max(histData,d=>d.count);
+
+    g.append('rect')
+     .attr('x',x(histStats.p10-0.5)).attr('y',0)
+     .attr('width',x(histStats.p90+0.5)-x(histStats.p10-0.5))
+     .attr('height',iH).attr('fill','#f0f0f0');
+
+    const bars = g.selectAll('rect.b').data(histData).enter().append('rect')
+      .attr('class',d=>`hist-bar${d.pts>=histStats.p10&&d.pts<=histStats.p90?' in-range':''}${d.count===peak?' peak':''}`)
+      .attr('x',d=>x(d.pts)-bw/2).attr('y',iH).attr('width',bw).attr('height',0).attr('rx',0);
+
+    bars.transition().duration(500).delay((_,i)=>i*18)
+      .attr('y',d=>y(d.count)).attr('height',d=>iH-y(d.count));
+
+    const tt = document.getElementById('histTooltip');
+    const total = d3.sum(histData,d=>d.count);
+    bars.on('mousemove',(ev,d)=>{
+      tt.style.opacity='1';
+      tt.style.left=(ev.offsetX+8)+'px';
+      tt.style.top=(ev.offsetY-28)+'px';
+      tt.textContent=`${d.pts} pts · ${((d.count/total)*100).toFixed(1)}%`;
+    }).on('mouseleave',()=>tt.style.opacity='0');
+
+    g.append('line').attr('class','hist-median')
+     .attr('x1',x(histStats.median)).attr('x2',x(histStats.median))
+     .attr('y1',-6).attr('y2',iH);
+    g.append('text')
+     .attr('x',x(histStats.median)+4).attr('y',-4)
+     .attr('font-family','var(--fontMono)').attr('font-size',10)
+     .attr('fill','var(--black)').attr('font-weight',700)
+     .text(`${histStats.median}`);
+
+    g.append('g').attr('class','axis').attr('transform',`translate(0,${iH})`)
+     .call(d3.axisBottom(x).ticks(Math.min(pts.length,10)).tickFormat(d3.format('d')));
+    g.append('g').attr('class','axis')
+     .call(d3.axisLeft(y).ticks(4).tickFormat(d=>d>=1000?`${(d/1000).toFixed(1)}k`:d));
+
+    g.append('text').attr('x',iW/2).attr('y',iH+28)
+     .attr('text-anchor','middle').attr('fill','var(--gray5)')
+     .attr('font-size',10).attr('font-family','var(--fontMono)').text('Final points');
+  }
+
+  // ── Mini score matrix ──────────────────────────────────────────────────────────
+  function miniMatrix(matrix, isHome, opp) {
+    if (!matrix || Object.keys(matrix).length===0) return '';
+    const maxVal = Math.max(...Object.values(matrix));
+    const hL = isHome ? abbr : (TEAM_ABBR[opp]||opp.slice(0,3).toUpperCase());
+    const aL = isHome ? (TEAM_ABBR[opp]||opp.slice(0,3).toUpperCase()) : abbr;
+    let html = `<div class="sm-mini"><table><thead><tr><th style="background:transparent;border:none;width:20px"></th>`;
+    for (let ag=0;ag<=3;ag++) html+=`<th>${aL} ${ag}</th>`;
+    html+=`</tr></thead><tbody>`;
+    for (let hg=0;hg<=3;hg++) {
+      html+=`<tr><th>${hL} ${hg}</th>`;
+      for (let ag=0;ag<=3;ag++) {
+        const key = isHome?`${hg}-${ag}`:`${ag}-${hg}`;
+        const val = matrix[key]||0;
+        const intensity = maxVal>0?val/maxVal:0;
+        const gv = Math.round(245-intensity*220);
+        const tc = intensity>0.55?'#fff':'#111';
+        html+=`<td style="background:rgb(${gv},${gv},${gv});color:${tc}">${val.toFixed(1)}%</td>`;
+      }
+      html+=`</tr>`;
+    }
+    html+=`</tbody></table></div>`;
+    return html;
+  }
+
+  // ── Fixtures table ─────────────────────────────────────────────────────────────
+  const tbody = document.getElementById('fixtureBody');
+  let totExp=0, totW=0, totD=0, totL=0;
+
+  teamFx.forEach((f,idx) => {
+    totExp+=f.expPts; totW+=f.winPct; totD+=f.drawPct; totL+=f.lossPct;
+    const detId = `fd-${idx}`;
+    const wc = f.winPct>=55?'cell-win':'', dc = f.drawPct>=28?'cell-draw':'', lc = f.lossPct>=40?'cell-loss':'';
+    const tr = document.createElement('tr');
+    tr.addEventListener('click',()=>{ document.getElementById(detId).classList.toggle('open'); });
+    tr.innerHTML=`
+      <td class="mono" style="color:var(--gray5);text-align:center">${f.gw}</td>
+      <td><span class="ha-badge ha-${f.ha}">${f.ha}</span></td>
+      <td><div style="display:flex;align-items:center;gap:0.4rem">${badge(f.opponent,18)}<span>${f.opponent}</span></div></td>
+      <td class="mono hide-mobile" style="text-align:right">${f.predFor}–${f.predAgainst}</td>
+      <td class="mono ${wc}" style="text-align:right">${f.winPct.toFixed(1)}%</td>
+      <td class="mono ${dc}" style="text-align:right">${f.drawPct.toFixed(1)}%</td>
+      <td class="mono ${lc}" style="text-align:right">${f.lossPct.toFixed(1)}%</td>
+      <td class="mono" style="text-align:right;font-weight:600">${f.expPts.toFixed(2)}</td>
+    `;
+    tbody.appendChild(tr);
+
+    const det = document.createElement('tr');
+    det.className='detail-row'; det.id=detId;
+    det.innerHTML=`<td colspan="8">
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;align-items:flex-start">
+        ${f.scoreMatrix&&Object.keys(f.scoreMatrix).length?`<div>
+          <div style="font-family:var(--fontMono);font-size:0.62rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--gray5);margin-bottom:0.35rem">Score probabilities</div>
+          ${miniMatrix(f.scoreMatrix,f.ha==='H',f.opponent)}
+        </div>`:''}
+        <div style="font-family:var(--fontMono);font-size:0.78rem;line-height:1.9">
+          xG For: <strong>${f.xgFor}</strong><br>
+          xG Against: <strong>${f.xgAgainst}</strong><br>
+          xPts: <strong>${f.expPts.toFixed(2)}</strong>
+        </div>
+      </div>
+    </td>`;
+    tbody.appendChild(det);
+  });
+
+  const tot = document.createElement('tr');
+  tot.className='total-row';
+  tot.innerHTML=`
+    <td></td>
+    <td></td>
+    <td style="font-weight:700">Total (${teamFx.length} games)</td>
+    <td class="hide-mobile"></td>
+    <td class="mono" style="text-align:right">${(totW/teamFx.length).toFixed(1)}%</td>
+    <td class="mono" style="text-align:right">${(totD/teamFx.length).toFixed(1)}%</td>
+    <td class="mono" style="text-align:right">${(totL/teamFx.length).toFixed(1)}%</td>
+    <td class="mono" style="text-align:right;font-weight:700">${totExp.toFixed(1)}</td>
+  `;
+  tbody.appendChild(tot);
+
+  window.addEventListener('load', () => {
+    drawHistogram();
+    window.addEventListener('resize', drawHistogram);
+  });
+
+} // end if teamProj exists
+
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('mainNav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

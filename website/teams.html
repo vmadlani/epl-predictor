@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teams — ThirtyEight</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="index.html"><span class="logo-mark">38</span><span class="logo-word-light">Thirty</span><span class="logo-word-bold">Eight</span></a>
+    <nav class="site-nav" id="mainNav">
+      <a href="table.html">Table</a>
+      <a href="fixtures.html">Fixtures</a>
+      <a href="teams.html" class="active">Teams</a>
+      <a href="champions-league.html">CL Race</a>
+      <a href="relegation.html">Relegation</a>
+      <a href="methodology.html">How It Works</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main class="page-body">
+<div class="container">
+
+  <div class="page-header">
+    <div class="eyebrow">ThirtyEight · 2025/26 Premier League</div>
+    <h1>All Teams</h1>
+    <p class="deck">Click any team to see their remaining fixtures, score probabilities, and projected points distribution.</p>
+  </div>
+
+  <!-- TEAM GRID -->
+  <div class="league-table-wrap">
+    <table class="league-table" id="teamsTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Team</th>
+          <th>P</th>
+          <th>Pts</th>
+          <th class="hide-mobile" style="text-align:center">Proj (P10·Med·P90)</th>
+          <th>Title%</th>
+          <th class="hide-mobile">Top 4%</th>
+          <th class="hide-mobile">Top 6%</th>
+          <th>Rel%</th>
+          <th class="hide-mobile hide-tablet">Form</th>
+        </tr>
+      </thead>
+      <tbody id="teamsBody"></tbody>
+    </table>
+  </div>
+
+</div>
+</main>
+
+<script src="data.js"></script>
+<script>
+const TEAM_COLORS = {
+  'Arsenal':'#EF0107','Man City':'#6CABDD','Aston Villa':'#95BFE5','Man United':'#DA291C',
+  'Chelsea':'#034694','Liverpool':'#C8102E','Brentford':'#D20000','Everton':'#003399',
+  'Newcastle':'#241F20','Bournemouth':'#DA291C','Sunderland':'#EB172B','Fulham':'#888',
+  'Brighton':'#0057B8','Crystal Palace':'#1B458F','Leeds':'#c9a800','Tottenham':'#132257',
+  "Nott'm Forest":'#DD0000','West Ham':'#7A263A','Burnley':'#6C1D45','Wolves':'#FDB913',
+};
+const TEAM_ABBR = {
+  'Arsenal':'ARS','Man City':'MCI','Aston Villa':'AVL','Man United':'MUN','Chelsea':'CHE',
+  'Liverpool':'LIV','Brentford':'BRE','Everton':'EVE','Newcastle':'NEW','Bournemouth':'BOU',
+  'Sunderland':'SUN','Fulham':'FUL','Brighton':'BHA','Crystal Palace':'CRY','Leeds':'LEE',
+  'Tottenham':'TOT',"Nott'm Forest":'NFO','West Ham':'WHU','Burnley':'BUR','Wolves':'WOL',
+};
+
+function badge(team, size=20) {
+  const c = TEAM_COLORS[team] || '#111';
+  const a = TEAM_ABBR[team] || team.slice(0,3).toUpperCase();
+  return `<div class="team-badge" style="width:${size}px;height:${size}px;background:${c};font-size:${size*.3}px">${a}</div>`;
+}
+function probBar(pct, type='black', maxP=100) {
+  const maxW = 52;
+  const w = pct > 0 ? Math.max(Math.round((pct/maxP)*maxW), 2) : 0;
+  const fmt = pct === 0 ? '<span style="color:var(--gray3)">—</span>' : `${pct.toFixed(1)}%`;
+  return `<div class="prob-bar-wrap"><div class="prob-bar ${type}" style="width:${w}px"></div><span class="prob-val">${fmt}</span></div>`;
+}
+function formGuide(form) {
+  return '<div class="form-guide">' + form.map(r=>`<div class="form-sq ${r}">${r}</div>`).join('') + '</div>';
+}
+
+const data = SITE_DATA;
+const tbody = document.getElementById('teamsBody');
+const maxTitle = Math.max(...data.projection.map(t=>t.titlePct));
+const maxTop4  = Math.max(...data.projection.map(t=>t.top4Pct));
+const maxTop6  = Math.max(...data.projection.map(t=>t.top6Pct));
+const maxRel   = Math.max(...data.projection.map(t=>t.relegPct));
+
+data.projection.forEach((t) => {
+  const pos = t.pos;
+  const zone = pos<=4?'zone-cl':pos<=6?'zone-el':pos>=18?'zone-rel':'zone-none';
+  const isLeader = pos===1?'zone-leader':'';
+  const tr = document.createElement('tr');
+  tr.className = `${zone} ${isLeader}`;
+  tr.style.cursor = 'pointer';
+  tr.onclick = () => window.location.href = `team.html?team=${encodeURIComponent(t.team)}`;
+  tr.innerHTML = `
+    <td>${pos}</td>
+    <td>
+      <div class="team-cell">
+        ${badge(t.team)}
+        <span class="team-name">${t.team}</span>
+      </div>
+    </td>
+    <td class="mono-cell">${t.played}</td>
+    <td class="mono-cell" style="font-weight:700">${t.currentPts}</td>
+    <td class="hide-mobile" style="text-align:center">
+      <div class="proj-inline">
+        <span class="p-lo">${t.projMin}</span><span class="sep">·</span>
+        <span class="p-med">${t.projMed}</span><span class="sep">·</span>
+        <span class="p-hi">${t.projMax}</span>
+      </div>
+    </td>
+    <td class="prob-bar-cell">${probBar(t.titlePct,'gold',maxTitle||100)}</td>
+    <td class="prob-bar-cell hide-mobile">${probBar(t.top4Pct,'purple',maxTop4||100)}</td>
+    <td class="prob-bar-cell hide-mobile">${probBar(t.top6Pct,'teal',maxTop6||100)}</td>
+    <td class="prob-bar-cell">${probBar(t.relegPct,'red',maxRel||100)}</td>
+    <td class="hide-mobile hide-tablet">${formGuide(t.form)}</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+// Zone legend
+const legend = document.createElement('tr');
+legend.innerHTML = `<td colspan="10" style="padding:1.25rem 0.5rem 0.5rem;font-family:var(--fontMono);font-size:0.65rem;color:var(--gray5)">
+  <span style="border-left:3px solid #6666ff;padding-left:6px;margin-right:1.5rem">Champions League</span>
+  <span style="border-left:3px solid var(--teal);padding-left:6px;margin-right:1.5rem">Europa League</span>
+  <span style="border-left:3px solid var(--lossRed);padding-left:6px">Relegation</span>
+</td>`;
+tbody.appendChild(legend);
+
+// Animate bars
+window.addEventListener('load', () => {
+  document.querySelectorAll('.prob-bar').forEach(b => {
+    const w = b.style.width; b.style.width='0';
+    setTimeout(() => { b.style.width = w; }, 80);
+  });
+});
+
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('mainNav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

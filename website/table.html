@@ -14,7 +14,9 @@
     <nav class="site-nav" id="mainNav">
       <a href="table.html" class="active">Table</a>
       <a href="fixtures.html">Fixtures</a>
-      <a href="team-arsenal.html">Teams</a>
+      <a href="teams.html">Teams</a>
+      <a href="champions-league.html">CL Race</a>
+      <a href="relegation.html">Relegation</a>
       <a href="methodology.html">How It Works</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
@@ -127,7 +129,7 @@ SITE_DATA.projection.forEach(t => {
   const tr=document.createElement('tr');
   tr.className=`${zone} ${isLeader}`;
   tr.style.cursor='pointer';
-  tr.onclick=()=>window.location.href='team-arsenal.html';
+  tr.onclick=()=>window.location.href=`team.html?team=${encodeURIComponent(t.team)}`;
   tr.innerHTML=`
     <td>${pos}</td>
     <td><div class="team-cell">${badge(t.team)}<span class="team-name">${t.team}</span></div></td>

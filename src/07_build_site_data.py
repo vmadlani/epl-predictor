@@ -154,11 +154,11 @@ GW_SCHEDULE = {
 # OPTIONAL CONFIG — only change these if something structural changes
 # =============================================================================
 
-FEATURE_TEAM = "Arsenal"    # team shown on the histogram / team page
+FEATURE_TEAM = "Arsenal"    # team shown on arsenalHist (backward compat)
 OUTPUTS_DIR  = "outputs"
 RAW_FILE     = "data/raw/epl_2025-26.csv"
 SITE_JS      = "website/data.js"
-N_SIM        = 10000        # simulations for feature-team histogram
+N_SIM        = 10000        # simulations for all-team histograms
 
 
 # =============================================================================
@@ -229,12 +229,14 @@ def get_match_probs(home, away, lookup, home_adv, rho):
     return hw, d, aw
 
 
-def run_feature_team_simulation(team, df_played, lookup, home_adv, rho, n_sim):
+def run_all_teams_simulation(df_played, lookup, home_adv, rho, n_sim):
     """
-    Runs n_sim simulations of the remaining season and returns
-    the distribution of final points for the feature team.
+    Runs n_sim simulations of the remaining season in one vectorised pass.
+    Returns a dict of {team_name: np.array of final points (length n_sim)}.
+    This is maximally efficient — the full sim is only executed once regardless
+    of how many teams we want histogram data for.
     """
-    print(f"  Running {n_sim:,} simulations for {team} histogram...")
+    print(f"  Running {n_sim:,} simulations for all teams...")
 
     # Current standings
     teams = sorted(df_played['HomeTeam'].dropna().unique().tolist())
@@ -280,8 +282,8 @@ def run_feature_team_simulation(team, df_played, lookup, home_adv, rho, n_sim):
         sim_pts[:, home_idx[fi]] += h_pts[:, fi]
         sim_pts[:, away_idx[fi]] += a_pts[:, fi]
 
-    tidx = team_idx[team]
-    return sim_pts[:, tidx]
+    # Return dict of team → pts array
+    return {t: sim_pts[:, i] for t, i in team_idx.items()}
 
 
 def build_histogram(pts_array, bins=20):
@@ -534,20 +536,27 @@ def main():
     print(f"  [OK] {len(ratings)} teams.")
 
     # ------------------------------------------------------------------
-    # Step 7 — Simulate feature team histogram
+    # Step 7 — Simulate all-team points distributions (single pass)
     # ------------------------------------------------------------------
-    print(f"\n[Step 7] Simulating {FEATURE_TEAM} points distribution...")
+    print(f"\n[Step 7] Simulating all-team points distributions ({N_SIM:,} sims)...")
     lookup, home_adv, rho = load_ratings_and_params()
-    pts_dist = run_feature_team_simulation(
-        FEATURE_TEAM, df_played, lookup, home_adv, rho, N_SIM
-    )
-    hist      = build_histogram(pts_dist)
-    hist_stats = {
-        "median": int(np.median(pts_dist)),
-        "p10":    int(np.percentile(pts_dist, 10)),
-        "p90":    int(np.percentile(pts_dist, 90)),
-    }
-    print(f"  [OK] Median: {hist_stats['median']} pts  "
+    all_pts = run_all_teams_simulation(df_played, lookup, home_adv, rho, N_SIM)
+
+    team_hist       = {}
+    team_hist_stats = {}
+    for t, pts_arr in all_pts.items():
+        team_hist[t]       = build_histogram(pts_arr)
+        team_hist_stats[t] = {
+            "median": int(np.median(pts_arr)),
+            "p10":    int(np.percentile(pts_arr, 10)),
+            "p90":    int(np.percentile(pts_arr, 90)),
+        }
+
+    # Backward-compat keys for existing team-arsenal.html
+    hist       = team_hist.get(FEATURE_TEAM, [])
+    hist_stats = team_hist_stats.get(FEATURE_TEAM, {"median": 0, "p10": 0, "p90": 0})
+    print(f"  [OK] {len(team_hist)} teams. "
+          f"{FEATURE_TEAM} median: {hist_stats['median']} pts "
           f"(P10: {hist_stats['p10']} — P90: {hist_stats['p90']})")
 
     # ------------------------------------------------------------------
@@ -556,13 +565,16 @@ def main():
     print("\n[Step 8] Writing data.js...")
 
     site_data = {
-        "lastUpdated":    f"GW{gw}",
-        "season":         "2025/26",
-        "projection":     projection,
-        f"gw{next_gw}":   gw_fixtures,
-        "teamFixtures":   team_fixtures,
-        "ratings":        ratings,
-        "arsenalHist":    hist,
+        "lastUpdated":      f"GW{gw}",
+        "season":           "2025/26",
+        "projection":       projection,
+        f"gw{next_gw}":     gw_fixtures,
+        "teamFixtures":     team_fixtures,
+        "ratings":          ratings,
+        "teamHist":         team_hist,
+        "teamHistStats":    team_hist_stats,
+        # backward-compat for existing team-arsenal.html
+        "arsenalHist":      hist,
         "arsenalHistStats": hist_stats,
     }
 

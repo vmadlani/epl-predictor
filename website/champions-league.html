@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Champions League Race — ThirtyEight</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .race-section-header {
+    font-family: var(--fontMono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    padding: 0.4rem 0.75rem;
+    margin: 2rem 0 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .race-section-header.ucl  { background: #6666ff; }
+  .race-section-header.uel  { background: var(--teal); }
+  .race-section-header.uecl { background: var(--gray5); }
+
+  .race-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--gray3);
+  }
+  .race-row:first-child { border-top: 1px solid var(--gray3); }
+  .race-pos {
+    font-family: var(--fontMono);
+    font-size: 0.72rem;
+    color: var(--gray5);
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .race-team {
+    font-size: 0.875rem;
+    font-weight: 600;
+    min-width: 110px;
+  }
+  .race-pts {
+    font-family: var(--fontMono);
+    font-size: 0.72rem;
+    color: var(--gray5);
+    min-width: 40px;
+    text-align: right;
+  }
+  .race-bar-wrap {
+    flex: 1;
+    height: 10px;
+    background: var(--gray2);
+    overflow: hidden;
+    min-width: 60px;
+  }
+  .race-bar {
+    height: 100%;
+    transition: width 0.7s ease;
+  }
+  .race-bar.ucl  { background: #6666ff; }
+  .race-bar.uel  { background: var(--teal); }
+  .race-bar.uecl { background: var(--gray4); }
+  .race-pct {
+    font-family: var(--fontMono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    min-width: 50px;
+    text-align: right;
+  }
+  .race-range {
+    font-family: var(--fontMono);
+    font-size: 0.68rem;
+    color: var(--gray5);
+    min-width: 80px;
+    text-align: right;
+  }
+  .cutoff-line {
+    border-top: 2px dashed var(--gray3);
+    margin: 0.15rem 0;
+    position: relative;
+  }
+  .cutoff-label {
+    font-family: var(--fontMono);
+    font-size: 0.6rem;
+    color: var(--gray4);
+    text-align: right;
+    padding: 0.2rem 0;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .key-stat-row {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    padding: 1.5rem 0 1rem;
+    border-bottom: 3px solid var(--black);
+    margin-bottom: 2rem;
+  }
+  .key-stat .val {
+    font-family: var(--fontMono);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--black);
+  }
+  .key-stat .val.ucl-col { color: #6666ff; }
+  .key-stat .val.uel-col { color: var(--teal); }
+  .key-stat .lbl {
+    font-size: 0.7rem;
+    color: var(--gray5);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 3px;
+  }
+  .pts-range-chart { margin-top: 0.5rem; }
+  .pts-range-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--gray3);
+    font-size: 0.85rem;
+  }
+  .range-track {
+    flex: 1;
+    height: 8px;
+    background: var(--gray2);
+    position: relative;
+    min-width: 80px;
+  }
+  .range-fill {
+    position: absolute;
+    height: 100%;
+    background: var(--gray3);
+    transition: left 0.5s ease, width 0.5s ease;
+  }
+  .range-fill.ucl-col { background: #6666ff; opacity: 0.5; }
+  .range-fill.uel-col { background: var(--teal); opacity: 0.5; }
+  .range-fill.danger  { background: var(--lossRed); opacity: 0.4; }
+  .range-median {
+    position: absolute;
+    width: 2px;
+    height: 14px;
+    top: -3px;
+    background: var(--black);
+  }
+  .range-num {
+    font-family: var(--fontMono);
+    font-size: 0.72rem;
+    color: var(--gray5);
+    min-width: 70px;
+    text-align: right;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="index.html"><span class="logo-mark">38</span><span class="logo-word-light">Thirty</span><span class="logo-word-bold">Eight</span></a>
+    <nav class="site-nav" id="mainNav">
+      <a href="table.html">Table</a>
+      <a href="fixtures.html">Fixtures</a>
+      <a href="teams.html">Teams</a>
+      <a href="champions-league.html" class="active">CL Race</a>
+      <a href="relegation.html">Relegation</a>
+      <a href="methodology.html">How It Works</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main class="page-body">
+<div class="container">
+
+  <!-- LEDE -->
+  <div class="home-lede" style="padding-top:1.5rem">
+    <div class="eyebrow">ThirtyEight · 2025/26 Premier League · European Qualification</div>
+    <h1>The race for <span class="accent" id="heroText">Champions League</span> places.</h1>
+    <p class="sub">Model-projected probabilities for all three European competitions. Based on 10,000 simulations of the remaining season.</p>
+    <div class="key-stat-row" id="keyStats"></div>
+  </div>
+
+  <!-- TOP 4 RACE -->
+  <section class="section">
+    <div class="section-label">
+      <span>Top 4 — Champions League Qualification</span>
+      <a href="table.html">Full table →</a>
+    </div>
+    <div id="top4Race"></div>
+  </section>
+
+  <!-- TOP 6 / EUROPA LEAGUE -->
+  <section class="section">
+    <div class="section-label">
+      <span>5th–6th — Europa League</span>
+    </div>
+    <div id="top6Race"></div>
+  </section>
+
+  <!-- PROJECTED POINTS RANGES -->
+  <section class="section">
+    <div class="section-label">
+      <span>Projected points — top 8 teams</span>
+      <span style="font-family:var(--fontMono);font-size:0.65rem;color:var(--gray5)">P10 · Median · P90</span>
+    </div>
+    <div class="pts-range-chart" id="rangeChart"></div>
+  </section>
+
+  <!-- FULL PROBABILITY TABLE -->
+  <section class="section">
+    <div class="section-label">
+      <span>Full European qualification table</span>
+    </div>
+    <div class="league-table-wrap">
+      <table class="league-table" id="fullTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th>Pts</th>
+            <th class="hide-mobile" style="text-align:center">Proj (P10·Med·P90)</th>
+            <th style="min-width:100px">UCL (Top 4)</th>
+            <th class="hide-mobile" style="min-width:100px">UEL (5th–6th)</th>
+            <th class="hide-mobile hide-tablet">Form</th>
+          </tr>
+        </thead>
+        <tbody id="fullTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<script src="data.js"></script>
+<script>
+const TEAM_COLORS = {
+  'Arsenal':'#EF0107','Man City':'#6CABDD','Aston Villa':'#95BFE5','Man United':'#DA291C',
+  'Chelsea':'#034694','Liverpool':'#C8102E','Brentford':'#D20000','Everton':'#003399',
+  'Newcastle':'#241F20','Bournemouth':'#DA291C','Sunderland':'#EB172B','Fulham':'#888',
+  'Brighton':'#0057B8','Crystal Palace':'#1B458F','Leeds':'#c9a800','Tottenham':'#132257',
+  "Nott'm Forest":'#DD0000','West Ham':'#7A263A','Burnley':'#6C1D45','Wolves':'#FDB913',
+};
+const TEAM_ABBR = {
+  'Arsenal':'ARS','Man City':'MCI','Aston Villa':'AVL','Man United':'MUN','Chelsea':'CHE',
+  'Liverpool':'LIV','Brentford':'BRE','Everton':'EVE','Newcastle':'NEW','Bournemouth':'BOU',
+  'Sunderland':'SUN','Fulham':'FUL','Brighton':'BHA','Crystal Palace':'CRY','Leeds':'LEE',
+  'Tottenham':'TOT',"Nott'm Forest":'NFO','West Ham':'WHU','Burnley':'BUR','Wolves':'WOL',
+};
+
+function badge(team, size=20) {
+  const c = TEAM_COLORS[team]||'#111';
+  const a = TEAM_ABBR[team]||team.slice(0,3).toUpperCase();
+  return `<div class="team-badge" style="width:${size}px;height:${size}px;background:${c};font-size:${size*.3}px">${a}</div>`;
+}
+function formGuide(form) {
+  return '<div class="form-guide">' + form.map(r=>`<div class="form-sq ${r}">${r}</div>`).join('') + '</div>';
+}
+function fmtPct(v) {
+  if (v < 0.1) return '<span style="color:var(--gray3)">—</span>';
+  if (v >= 99.9) return '<strong style="color:var(--winGreen)">99.9%</strong>';
+  return v.toFixed(1)+'%';
+}
+
+const proj = SITE_DATA.projection;
+
+// ── Key stats ─────────────────────────────────────────────────────────────────
+const clLeader  = [...proj].sort((a,b)=>b.top4Pct-a.top4Pct)[0];
+const clBubble  = proj[3]; // 4th place
+const elLeader  = [...proj].sort((a,b)=>b.top6Pct-a.top6Pct).find(t=>t.pos>4);
+const gapPts    = proj[3].currentPts - proj[4].currentPts;
+
+const keyStatsEl = document.getElementById('keyStats');
+keyStatsEl.innerHTML = `
+  <div class="key-stat">
+    <div class="val ucl-col">${clLeader.top4Pct.toFixed(0)}%</div>
+    <div class="lbl">${clLeader.team}'s UCL probability</div>
+  </div>
+  <div class="key-stat">
+    <div class="val">${clBubble.team}</div>
+    <div class="lbl">4th place — ${clBubble.currentPts} pts</div>
+  </div>
+  <div class="key-stat">
+    <div class="val">${Math.abs(gapPts)} pts</div>
+    <div class="lbl">Gap: 4th to 5th</div>
+  </div>
+  <div class="key-stat">
+    <div class="val uel-col">${elLeader ? elLeader.top6Pct.toFixed(0)+'%' : '—'}</div>
+    <div class="lbl">${elLeader ? elLeader.team+"'s UEL probability" : 'Europa League'}</div>
+  </div>
+`;
+
+// ── Top 4 race rows ───────────────────────────────────────────────────────────
+const top4El = document.getElementById('top4Race');
+const top4Contenders = proj.filter(t => t.top4Pct > 1 || t.pos <= 8).slice(0, 10);
+const maxTop4 = Math.max(...top4Contenders.map(t=>t.top4Pct));
+
+top4Contenders.forEach((t,i) => {
+  const isInZone = t.pos <= 4;
+  const row = document.createElement('div');
+  row.className = 'race-row';
+  row.style.cursor = 'pointer';
+  row.onclick = () => window.location.href = `team.html?team=${encodeURIComponent(t.team)}`;
+
+  if (i === 4 && top4Contenders[3].pos === 4) {
+    const cutoff = document.createElement('div');
+    cutoff.className = 'cutoff-label';
+    cutoff.textContent = '— CL cut-off —';
+    top4El.appendChild(cutoff);
+  }
+
+  row.innerHTML = `
+    <span class="race-pos">${t.pos}</span>
+    ${badge(t.team, 22)}
+    <span class="race-team">${t.team}</span>
+    <span class="race-pts">${t.currentPts} pts</span>
+    <div class="race-bar-wrap"><div class="race-bar ucl" style="width:${Math.max(t.top4Pct,0.3)/maxTop4*100}%"></div></div>
+    <span class="race-pct" style="color:#6666ff">${fmtPct(t.top4Pct)}</span>
+    <span class="race-range hide-mobile">${t.projMin}–${t.projMed}–${t.projMax}</span>
+  `;
+  top4El.appendChild(row);
+});
+
+// ── Top 6 / Europa race ───────────────────────────────────────────────────────
+const top6El = document.getElementById('top6Race');
+// Teams with realistic UEL shots (5th/6th) — those not already in top 4 zone
+const uelContenders = proj.filter(t => t.top6Pct > 5 || (t.pos >= 4 && t.pos <= 9)).slice(0, 8);
+const maxUEL = Math.max(...uelContenders.map(t=>t.top6Pct));
+
+uelContenders.forEach((t,i) => {
+  const row = document.createElement('div');
+  row.className = 'race-row';
+  row.style.cursor = 'pointer';
+  row.onclick = () => window.location.href = `team.html?team=${encodeURIComponent(t.team)}`;
+
+  if (i === 2 && uelContenders[1].pos <= 6) {
+    const cutoff = document.createElement('div');
+    cutoff.className = 'cutoff-label';
+    cutoff.textContent = '— UEL cut-off —';
+    top6El.appendChild(cutoff);
+  }
+
+  row.innerHTML = `
+    <span class="race-pos">${t.pos}</span>
+    ${badge(t.team, 22)}
+    <span class="race-team">${t.team}</span>
+    <span class="race-pts">${t.currentPts} pts</span>
+    <div class="race-bar-wrap"><div class="race-bar uel" style="width:${Math.max(t.top6Pct,0.3)/maxUEL*100}%"></div></div>
+    <span class="race-pct" style="color:var(--teal)">${fmtPct(t.top6Pct)}</span>
+    <span class="race-range hide-mobile">${t.projMin}–${t.projMed}–${t.projMax}</span>
+  `;
+  top6El.appendChild(row);
+});
+
+// ── Projected points range chart ──────────────────────────────────────────────
+const rangeEl = document.getElementById('rangeChart');
+const top8 = proj.slice(0, 8);
+const allMins = top8.map(t=>t.projMin);
+const allMaxs = top8.map(t=>t.projMax);
+const domainMin = Math.min(...allMins) - 2;
+const domainMax = Math.max(...allMaxs) + 2;
+const domainRange = domainMax - domainMin;
+
+top8.forEach(t => {
+  const colorClass = t.pos<=4 ? 'ucl-col' : t.pos<=6 ? 'uel-col' : '';
+  const pctLo  = ((t.projMin - domainMin)/domainRange)*100;
+  const pctHi  = ((t.projMax - domainMin)/domainRange)*100;
+  const pctMed = ((t.projMed - domainMin)/domainRange)*100;
+
+  const row = document.createElement('div');
+  row.className = 'pts-range-row';
+  row.style.cursor = 'pointer';
+  row.onclick = () => window.location.href = `team.html?team=${encodeURIComponent(t.team)}`;
+  row.innerHTML = `
+    <span style="width:20px;text-align:center;font-family:var(--fontMono);font-size:0.72rem;color:var(--gray5)">${t.pos}</span>
+    ${badge(t.team, 20)}
+    <span style="min-width:110px;font-weight:600">${t.team}</span>
+    <div class="range-track">
+      <div class="range-fill ${colorClass}" style="left:${pctLo}%;width:${pctHi-pctLo}%"></div>
+      <div class="range-median" style="left:${pctMed}%"></div>
+    </div>
+    <span class="range-num">${t.projMin}·<strong>${t.projMed}</strong>·${t.projMax}</span>
+  `;
+  rangeEl.appendChild(row);
+});
+
+// ── Full probability table ────────────────────────────────────────────────────
+const tBody = document.getElementById('fullTableBody');
+const tableTeams = proj.filter(t => t.top4Pct > 0.5 || t.top6Pct > 2 || t.pos <= 10);
+const tMaxTop4 = Math.max(...tableTeams.map(t=>t.top4Pct));
+const tMaxTop6 = Math.max(...tableTeams.map(t=>t.top6Pct));
+
+tableTeams.forEach((t,i) => {
+  const prevPos = i > 0 ? tableTeams[i-1].pos : 0;
+  if (i > 0 && t.pos > 6 && prevPos <= 6) {
+    const sep = document.createElement('tr');
+    sep.innerHTML = `<td colspan="7" style="text-align:center;font-family:var(--fontMono);font-size:0.65rem;color:var(--gray3);padding:0.2rem;border-bottom:1px solid var(--gray3)">· · ·</td>`;
+    tBody.appendChild(sep);
+  }
+  const zone = t.pos<=4?'zone-cl':t.pos<=6?'zone-el':'zone-none';
+  const tr = document.createElement('tr');
+  tr.className = zone;
+  tr.style.cursor = 'pointer';
+  tr.onclick = () => window.location.href = `team.html?team=${encodeURIComponent(t.team)}`;
+
+  const top4Bar = t.top4Pct < 0.1 ? '<span style="color:var(--gray3)">—</span>'
+    : `<div class="prob-bar-wrap"><div class="prob-bar purple" style="width:${Math.max(Math.round(t.top4Pct/tMaxTop4*52),2)}px"></div><span class="prob-val">${t.top4Pct.toFixed(1)}%</span></div>`;
+  const top6Bar = t.top6Pct < 0.1 ? '<span style="color:var(--gray3)">—</span>'
+    : `<div class="prob-bar-wrap"><div class="prob-bar teal" style="width:${Math.max(Math.round(t.top6Pct/tMaxTop6*52),2)}px"></div><span class="prob-val">${t.top6Pct.toFixed(1)}%</span></div>`;
+
+  tr.innerHTML = `
+    <td>${t.pos}</td>
+    <td><div class="team-cell">${badge(t.team)}<span class="team-name">${t.team}</span></div></td>
+    <td class="mono-cell" style="font-weight:700">${t.currentPts}</td>
+    <td class="hide-mobile" style="text-align:center">
+      <div class="proj-inline">
+        <span class="p-lo">${t.projMin}</span><span class="sep">·</span>
+        <span class="p-med">${t.projMed}</span><span class="sep">·</span>
+        <span class="p-hi">${t.projMax}</span>
+      </div>
+    </td>
+    <td class="prob-bar-cell">${top4Bar}</td>
+    <td class="prob-bar-cell hide-mobile">${top6Bar}</td>
+    <td class="hide-mobile hide-tablet">${formGuide(t.form)}</td>
+  `;
+  tBody.appendChild(tr);
+});
+
+// Animate bars
+window.addEventListener('load', () => {
+  document.querySelectorAll('.race-bar').forEach(b => {
+    const w = b.style.width; b.style.width='0';
+    setTimeout(() => { b.style.width = w; }, 100);
+  });
+  document.querySelectorAll('.prob-bar').forEach(b => {
+    const w = b.style.width; b.style.width='0';
+    setTimeout(() => { b.style.width = w; }, 80);
+  });
+  document.querySelectorAll('.range-fill').forEach(el => {
+    const left = el.style.left, width = el.style.width;
+    el.style.left='50%'; el.style.width='0';
+    setTimeout(() => { el.style.left=left; el.style.width=width; }, 100);
+  });
+});
+
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('mainNav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

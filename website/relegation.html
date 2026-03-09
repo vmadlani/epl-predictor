@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relegation Battle — ThirtyEight</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .rel-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--gray3);
+  }
+  .rel-row:first-child { border-top: 1px solid var(--gray3); }
+  .rel-row.danger { background: #fff5f5; margin: 0 -0.25rem; padding-left: 0.25rem; padding-right: 0.25rem; }
+  .rel-pos {
+    font-family: var(--fontMono);
+    font-size: 0.72rem;
+    color: var(--gray5);
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .rel-team {
+    font-size: 0.875rem;
+    font-weight: 600;
+    min-width: 110px;
+  }
+  .rel-pts {
+    font-family: var(--fontMono);
+    font-size: 0.72rem;
+    color: var(--gray5);
+    min-width: 50px;
+    text-align: right;
+  }
+  .rel-bar-wrap {
+    flex: 1;
+    height: 10px;
+    background: var(--gray2);
+    overflow: hidden;
+    min-width: 60px;
+  }
+  .rel-bar {
+    height: 100%;
+    background: #c0392b;
+    transition: width 0.7s ease;
+  }
+  .rel-pct {
+    font-family: var(--fontMono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    min-width: 50px;
+    text-align: right;
+  }
+  .rel-range {
+    font-family: var(--fontMono);
+    font-size: 0.68rem;
+    color: var(--gray5);
+    min-width: 80px;
+    text-align: right;
+  }
+  .key-stat-row {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    padding: 1.5rem 0 1rem;
+    border-bottom: 3px solid var(--black);
+    margin-bottom: 2rem;
+  }
+  .key-stat .val {
+    font-family: var(--fontMono);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--black);
+  }
+  .key-stat .val.red { color: var(--lossRed); }
+  .key-stat .val.amber { color: #856404; }
+  .key-stat .lbl {
+    font-size: 0.7rem;
+    color: var(--gray5);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 3px;
+  }
+  .cutoff-label {
+    font-family: var(--fontMono);
+    font-size: 0.6rem;
+    color: var(--gray4);
+    text-align: right;
+    padding: 0.2rem 0;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .pts-range-chart { margin-top: 0.5rem; }
+  .pts-range-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--gray3);
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .pts-range-row:hover { background: var(--gray1); }
+  .range-track {
+    flex: 1;
+    height: 8px;
+    background: var(--gray2);
+    position: relative;
+    min-width: 80px;
+  }
+  .range-fill {
+    position: absolute;
+    height: 100%;
+    transition: left 0.5s ease, width 0.5s ease;
+  }
+  .range-fill.safe    { background: var(--winGreenMid); opacity: 0.5; }
+  .range-fill.danger  { background: var(--lossRed); opacity: 0.5; }
+  .range-fill.neutral { background: var(--gray3); }
+  .range-median {
+    position: absolute;
+    width: 2px;
+    height: 14px;
+    top: -3px;
+    background: var(--black);
+  }
+  .range-num {
+    font-family: var(--fontMono);
+    font-size: 0.72rem;
+    color: var(--gray5);
+    min-width: 70px;
+    text-align: right;
+  }
+  .safety-gap {
+    font-family: var(--fontMono);
+    font-size: 0.72rem;
+    min-width: 90px;
+    text-align: right;
+  }
+  .safety-gap.above { color: var(--winGreen); }
+  .safety-gap.below { color: var(--lossRed); }
+  .safety-gap.borderline { color: #856404; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="index.html"><span class="logo-mark">38</span><span class="logo-word-light">Thirty</span><span class="logo-word-bold">Eight</span></a>
+    <nav class="site-nav" id="mainNav">
+      <a href="table.html">Table</a>
+      <a href="fixtures.html">Fixtures</a>
+      <a href="teams.html">Teams</a>
+      <a href="champions-league.html">CL Race</a>
+      <a href="relegation.html" class="active">Relegation</a>
+      <a href="methodology.html">How It Works</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main class="page-body">
+<div class="container">
+
+  <!-- LEDE -->
+  <div class="home-lede" style="padding-top:1.5rem">
+    <div class="eyebrow">ThirtyEight · 2025/26 Premier League · Relegation Battle</div>
+    <h1>Who drops <span class="accent" id="heroText">out of the Premier League</span>?</h1>
+    <p class="sub">The bottom three are relegated. Model-projected survival probabilities based on 10,000 simulations of the remaining season.</p>
+    <div class="key-stat-row" id="keyStats"></div>
+  </div>
+
+  <!-- RELEGATION RACE -->
+  <section class="section">
+    <div class="section-label">
+      <span>Relegation battle — bottom eight</span>
+      <a href="table.html">Full table →</a>
+    </div>
+    <div id="relRace"></div>
+  </section>
+
+  <!-- PROJECTED POINTS RANGES -->
+  <section class="section">
+    <div class="section-label">
+      <span>Projected final points — bottom ten teams</span>
+      <span style="font-family:var(--fontMono);font-size:0.65rem;color:var(--gray5)">P10 · Median · P90</span>
+    </div>
+    <div class="pts-range-chart" id="rangeChart"></div>
+  </section>
+
+  <!-- FULL RELEGATION TABLE -->
+  <section class="section">
+    <div class="section-label">
+      <span>Full survival probability table</span>
+    </div>
+    <div class="league-table-wrap">
+      <table class="league-table" id="fullTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th>Pts</th>
+            <th class="hide-mobile" style="text-align:center">Proj (P10·Med·P90)</th>
+            <th>Relegation%</th>
+            <th class="hide-mobile">Pts to safety</th>
+            <th class="hide-mobile hide-tablet">Form</th>
+          </tr>
+        </thead>
+        <tbody id="fullTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<script src="data.js"></script>
+<script>
+const TEAM_COLORS = {
+  'Arsenal':'#EF0107','Man City':'#6CABDD','Aston Villa':'#95BFE5','Man United':'#DA291C',
+  'Chelsea':'#034694','Liverpool':'#C8102E','Brentford':'#D20000','Everton':'#003399',
+  'Newcastle':'#241F20','Bournemouth':'#DA291C','Sunderland':'#EB172B','Fulham':'#888',
+  'Brighton':'#0057B8','Crystal Palace':'#1B458F','Leeds':'#c9a800','Tottenham':'#132257',
+  "Nott'm Forest":'#DD0000','West Ham':'#7A263A','Burnley':'#6C1D45','Wolves':'#FDB913',
+};
+const TEAM_ABBR = {
+  'Arsenal':'ARS','Man City':'MCI','Aston Villa':'AVL','Man United':'MUN','Chelsea':'CHE',
+  'Liverpool':'LIV','Brentford':'BRE','Everton':'EVE','Newcastle':'NEW','Bournemouth':'BOU',
+  'Sunderland':'SUN','Fulham':'FUL','Brighton':'BHA','Crystal Palace':'CRY','Leeds':'LEE',
+  'Tottenham':'TOT',"Nott'm Forest":'NFO','West Ham':'WHU','Burnley':'BUR','Wolves':'WOL',
+};
+
+function badge(team, size=20) {
+  const c = TEAM_COLORS[team]||'#111';
+  const a = TEAM_ABBR[team]||team.slice(0,3).toUpperCase();
+  return `<div class="team-badge" style="width:${size}px;height:${size}px;background:${c};font-size:${size*.3}px">${a}</div>`;
+}
+function formGuide(form) {
+  return '<div class="form-guide">' + form.map(r=>`<div class="form-sq ${r}">${r}</div>`).join('') + '</div>';
+}
+function fmtPct(v) {
+  if (v < 0.1) return '<span style="color:var(--gray3)">—</span>';
+  if (v >= 99.9) return '<strong style="color:var(--lossRed)">99.9%</strong>';
+  return v.toFixed(1)+'%';
+}
+
+const proj = SITE_DATA.projection;
+
+// Sort by relegation probability (descending) for danger teams
+const byRelegPct = [...proj].sort((a,b)=>b.relegPct-a.relegPct);
+const mostDanger  = byRelegPct[0];
+const safetyLine  = proj[16]; // 17th place team
+const bottomThree = proj.slice(17); // 18th-20th
+const borderline  = proj[16]; // 17th is borderline
+
+// Current pts of 17th place team (the "safety" benchmark)
+const safetyPts = proj.find(t=>t.pos===17)?.currentPts ?? proj[16].currentPts;
+
+// ── Key stats ─────────────────────────────────────────────────────────────────
+const keyStatsEl = document.getElementById('keyStats');
+const avgRelPct  = bottomThree.reduce((s,t)=>s+t.relegPct,0)/3;
+keyStatsEl.innerHTML = `
+  <div class="key-stat">
+    <div class="val red">${mostDanger.relegPct.toFixed(0)}%</div>
+    <div class="lbl">${mostDanger.team} relegation risk</div>
+  </div>
+  <div class="key-stat">
+    <div class="val">${safetyPts} pts</div>
+    <div class="lbl">Current 17th place (${safetyLine.team})</div>
+  </div>
+  <div class="key-stat">
+    <div class="val amber">${borderline.relegPct.toFixed(1)}%</div>
+    <div class="lbl">${borderline.team} (17th) relegation risk</div>
+  </div>
+  <div class="key-stat">
+    <div class="val">${avgRelPct.toFixed(0)}%</div>
+    <div class="lbl">Average risk, bottom 3</div>
+  </div>
+`;
+
+// ── Relegation race rows ──────────────────────────────────────────────────────
+const relEl = document.getElementById('relRace');
+// Show bottom 10 or any team with relegation risk > 2%
+const relContenders = proj.filter(t => t.relegPct > 1 || t.pos >= 13).slice(-10);
+const maxRel = Math.max(...relContenders.map(t=>t.relegPct));
+
+// Add relegation zone divider
+let shownDivider = false;
+
+relContenders.forEach((t,i) => {
+  // Add cutoff line between 17th and 18th
+  if (!shownDivider && t.pos >= 18) {
+    const cutoff = document.createElement('div');
+    cutoff.className = 'cutoff-label';
+    cutoff.textContent = '— Relegation zone —';
+    cutoff.style.color = 'var(--lossRed)';
+    relEl.appendChild(cutoff);
+    shownDivider = true;
+  }
+
+  const isDanger = t.pos >= 18;
+  const row = document.createElement('div');
+  row.className = `rel-row${isDanger?' danger':''}`;
+  row.style.cursor = 'pointer';
+  row.onclick = () => window.location.href = `team.html?team=${encodeURIComponent(t.team)}`;
+
+  const gapToSafety = t.currentPts - safetyPts;
+  let gapHtml = '';
+  if (t.pos >= 18) {
+    gapHtml = `<span class="rel-range hide-mobile" style="color:var(--lossRed)">-${Math.abs(gapToSafety)} to safety</span>`;
+  } else if (t.pos === 17) {
+    gapHtml = `<span class="rel-range hide-mobile" style="color:#856404">Safety line</span>`;
+  } else {
+    gapHtml = `<span class="rel-range hide-mobile" style="color:var(--gray5)">+${gapToSafety} above</span>`;
+  }
+
+  row.innerHTML = `
+    <span class="rel-pos">${t.pos}</span>
+    ${badge(t.team, 22)}
+    <span class="rel-team">${t.team}</span>
+    <span class="rel-pts">${t.currentPts} pts</span>
+    <div class="rel-bar-wrap"><div class="rel-bar" style="width:${Math.max(t.relegPct,0.3)/maxRel*100}%"></div></div>
+    <span class="rel-pct" style="color:${t.relegPct>50?'var(--lossRed)':t.relegPct>20?'#856404':'var(--nearBlack)'}">${fmtPct(t.relegPct)}</span>
+    ${gapHtml}
+  `;
+  relEl.appendChild(row);
+});
+
+// ── Projected points range chart (bottom 10) ──────────────────────────────────
+const rangeEl = document.getElementById('rangeChart');
+const bottom10 = proj.slice(-10);
+const allMins = bottom10.map(t=>t.projMin);
+const allMaxs = bottom10.map(t=>t.projMax);
+const domainMin = Math.min(...allMins) - 2;
+const domainMax = Math.max(...allMaxs) + 2;
+const domainRange = domainMax - domainMin;
+// safety threshold — median pts of 17th team approximated
+const safetyMed = proj[16].projMed;
+const safetyPctDom = ((safetyMed - domainMin)/domainRange)*100;
+
+bottom10.forEach(t => {
+  const isDanger = t.pos >= 18;
+  const isBorderline = t.pos === 17;
+  const colorClass = isDanger ? 'danger' : isBorderline ? 'neutral' : 'safe';
+
+  const pctLo  = ((t.projMin - domainMin)/domainRange)*100;
+  const pctHi  = ((t.projMax - domainMin)/domainRange)*100;
+  const pctMed = ((t.projMed - domainMin)/domainRange)*100;
+
+  const row = document.createElement('div');
+  row.className = 'pts-range-row';
+  row.onclick = () => window.location.href = `team.html?team=${encodeURIComponent(t.team)}`;
+  row.innerHTML = `
+    <span style="width:20px;text-align:center;font-family:var(--fontMono);font-size:0.72rem;color:var(--gray5)">${t.pos}</span>
+    ${badge(t.team, 20)}
+    <span style="min-width:110px;font-weight:${isDanger?'700':'600'};color:${isDanger?'var(--lossRed)':'inherit'}">${t.team}</span>
+    <div class="range-track">
+      <div class="range-fill ${colorClass}" style="left:${pctLo}%;width:${pctHi-pctLo}%"></div>
+      <div class="range-median" style="left:${pctMed}%"></div>
+    </div>
+    <span class="range-num">${t.projMin}·<strong>${t.projMed}</strong>·${t.projMax}</span>
+    <span class="safety-gap hide-mobile ${isDanger?'below':isBorderline?'borderline':'above'}">
+      ${isDanger ? `${t.currentPts - safetyPts} pts` : isBorderline ? 'Safety line' : `+${t.currentPts - safetyPts} pts`}
+    </span>
+  `;
+  rangeEl.appendChild(row);
+});
+
+// ── Full survival probability table ──────────────────────────────────────────
+const tBody = document.getElementById('fullTableBody');
+const tableTeams = proj.filter(t => t.relegPct > 0.5 || t.pos >= 14);
+const tMaxRel = Math.max(...tableTeams.map(t=>t.relegPct));
+
+let shownRelDiv = false;
+tableTeams.forEach((t,i) => {
+  if (!shownRelDiv && t.pos >= 18) {
+    const sep = document.createElement('tr');
+    sep.innerHTML = `<td colspan="7" style="text-align:center;font-family:var(--fontMono);font-size:0.65rem;color:var(--lossRed);padding:0.3rem;border-bottom:1px solid var(--lossRed);font-weight:700;letter-spacing:0.06em">RELEGATION ZONE</td>`;
+    tBody.appendChild(sep);
+    shownRelDiv = true;
+  }
+
+  const zone = t.pos >= 18 ? 'zone-rel' : 'zone-none';
+  const gapToSafety17 = t.pos >= 18 ? t.currentPts - safetyPts : t.pos === 17 ? 0 : t.currentPts - safetyPts;
+  const gapDisplay = t.pos === 17 ? '<span style="color:#856404">Safety line</span>'
+    : t.pos >= 18 ? `<span style="color:var(--lossRed)">${gapToSafety17}</span>`
+    : `<span style="color:var(--winGreen)">+${gapToSafety17}</span>`;
+
+  const relBar = t.relegPct < 0.1
+    ? '<span style="color:var(--gray3)">—</span>'
+    : `<div class="prob-bar-wrap"><div class="prob-bar red" style="width:${Math.max(Math.round(t.relegPct/tMaxRel*52),2)}px"></div><span class="prob-val">${t.relegPct.toFixed(1)}%</span></div>`;
+
+  const tr = document.createElement('tr');
+  tr.className = zone;
+  tr.style.cursor = 'pointer';
+  tr.onclick = () => window.location.href = `team.html?team=${encodeURIComponent(t.team)}`;
+  tr.innerHTML = `
+    <td>${t.pos}</td>
+    <td><div class="team-cell">${badge(t.team)}<span class="team-name">${t.team}</span></div></td>
+    <td class="mono-cell" style="font-weight:700">${t.currentPts}</td>
+    <td class="hide-mobile" style="text-align:center">
+      <div class="proj-inline">
+        <span class="p-lo">${t.projMin}</span><span class="sep">·</span>
+        <span class="p-med">${t.projMed}</span><span class="sep">·</span>
+        <span class="p-hi">${t.projMax}</span>
+      </div>
+    </td>
+    <td class="prob-bar-cell">${relBar}</td>
+    <td class="mono-cell hide-mobile">${gapDisplay}</td>
+    <td class="hide-mobile hide-tablet">${formGuide(t.form)}</td>
+  `;
+  tBody.appendChild(tr);
+});
+
+// Animate
+window.addEventListener('load', () => {
+  document.querySelectorAll('.rel-bar').forEach(b => {
+    const w = b.style.width; b.style.width='0';
+    setTimeout(() => { b.style.width = w; }, 100);
+  });
+  document.querySelectorAll('.prob-bar').forEach(b => {
+    const w = b.style.width; b.style.width='0';
+    setTimeout(() => { b.style.width = w; }, 80);
+  });
+  document.querySelectorAll('.range-fill').forEach(el => {
+    const left = el.style.left, width = el.style.width;
+    el.style.left='50%'; el.style.width='0';
+    setTimeout(() => { el.style.left=left; el.style.width=width; }, 100);
+  });
+});
+
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('mainNav').classList.toggle('open');
+});
+</script>
+</body>
+</html>
