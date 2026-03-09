@@ -5,6 +5,197 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teams — ThirtyEight</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* ── Team card grid ─────────────────────────────────────────────── */
+  .teams-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--gray3);
+    border: 1px solid var(--gray3);
+    margin-bottom: 3rem;
+  }
+  .team-card {
+    background: var(--white);
+    padding: 1.1rem 1.1rem 0.9rem;
+    cursor: pointer;
+    transition: background 0.1s;
+    border-left: 3px solid transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    text-decoration: none;
+    color: inherit;
+  }
+  .team-card:hover { background: var(--gray1); text-decoration: none; }
+  .team-card.zone-cl  { border-left-color: #6666ff; }
+  .team-card.zone-el  { border-left-color: var(--teal); }
+  .team-card.zone-rel { border-left-color: var(--lossRed); }
+
+  /* Card header: badge + name + position */
+  .tc-header {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.65rem;
+  }
+  .tc-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--fontMono);
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .tc-name-block { flex: 1; }
+  .tc-name {
+    font-size: 0.975rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--black);
+  }
+  .tc-subline {
+    font-family: var(--fontMono);
+    font-size: 0.62rem;
+    color: var(--gray5);
+    margin-top: 2px;
+  }
+  .tc-pos {
+    font-family: var(--fontMono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gray3);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  /* Pts + proj row */
+  .tc-pts-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .tc-pts-num {
+    font-family: var(--fontMono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1;
+  }
+  .tc-pts-lbl {
+    font-family: var(--fontMono);
+    font-size: 0.65rem;
+    color: var(--gray5);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .tc-proj {
+    margin-left: auto;
+    font-family: var(--fontMono);
+    font-size: 0.68rem;
+    color: var(--gray5);
+    text-align: right;
+    line-height: 1.4;
+  }
+  .tc-proj strong { color: var(--black); font-size: 0.8rem; }
+
+  /* Key probability bar */
+  .tc-stat-row {
+    margin-bottom: 0.6rem;
+  }
+  .tc-stat-label {
+    font-family: var(--fontMono);
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray5);
+    margin-bottom: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .tc-stat-label .tc-stat-val {
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-family: var(--fontMono);
+  }
+  .tc-stat-label .tc-stat-val.gold   { color: var(--eplGold); }
+  .tc-stat-label .tc-stat-val.purple { color: #6666ff; }
+  .tc-stat-label .tc-stat-val.teal   { color: var(--teal); }
+  .tc-stat-label .tc-stat-val.red    { color: var(--lossRed); }
+  .tc-bar-track {
+    height: 5px;
+    background: var(--gray2);
+    width: 100%;
+  }
+  .tc-bar-fill {
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+  .tc-bar-fill.gold   { background: var(--eplGold); }
+  .tc-bar-fill.purple { background: #6666ff; }
+  .tc-bar-fill.teal   { background: var(--teal); }
+  .tc-bar-fill.red    { background: #c0392b; }
+
+  /* Footer: form + next fixture */
+  .tc-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.6rem;
+    padding-top: 0.55rem;
+    border-top: 1px solid var(--gray2);
+    gap: 0.5rem;
+  }
+  .tc-next {
+    font-family: var(--fontMono);
+    font-size: 0.6rem;
+    color: var(--gray5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+  }
+  .tc-next .tc-next-ha {
+    font-weight: 700;
+    color: var(--gray6);
+  }
+
+  /* Zone legend */
+  .zone-legend {
+    display: flex;
+    gap: 1.5rem;
+    font-family: var(--fontMono);
+    font-size: 0.65rem;
+    color: var(--gray5);
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .zone-legend span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .zone-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 540px) {
+    .teams-grid { grid-template-columns: 1fr; }
+    .tc-next { display: none; }
+  }
+</style>
 </head>
 <body>
 
@@ -25,31 +216,18 @@
 <div class="container">
 
   <div class="page-header">
-    <div class="eyebrow">ThirtyEight · 2025/26 Premier League</div>
+    <div class="eyebrow" id="pageEyebrow">ThirtyEight · 2025/26 Premier League</div>
     <h1>All Teams</h1>
-    <p class="deck">Click any team to see their remaining fixtures, score probabilities, and projected points distribution.</p>
+    <p class="deck">Click any team to see their full fixture list, score probabilities, and projected final points.</p>
   </div>
 
-  <!-- TEAM GRID -->
-  <div class="league-table-wrap">
-    <table class="league-table" id="teamsTable">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Team</th>
-          <th>P</th>
-          <th>Pts</th>
-          <th class="hide-mobile" style="text-align:center">Proj (P10·Med·P90)</th>
-          <th>Title%</th>
-          <th class="hide-mobile">Top 4%</th>
-          <th class="hide-mobile">Top 6%</th>
-          <th>Rel%</th>
-          <th class="hide-mobile hide-tablet">Form</th>
-        </tr>
-      </thead>
-      <tbody id="teamsBody"></tbody>
-    </table>
+  <div class="zone-legend">
+    <span><span class="zone-dot" style="background:#6666ff"></span>Champions League</span>
+    <span><span class="zone-dot" style="background:var(--teal)"></span>Europa League</span>
+    <span><span class="zone-dot" style="background:var(--lossRed)"></span>Relegation zone</span>
   </div>
+
+  <div class="teams-grid" id="teamsGrid"></div>
 
 </div>
 </main>
@@ -70,76 +248,105 @@ const TEAM_ABBR = {
   'Tottenham':'TOT',"Nott'm Forest":'NFO','West Ham':'WHU','Burnley':'BUR','Wolves':'WOL',
 };
 
-function badge(team, size=20) {
-  const c = TEAM_COLORS[team] || '#111';
-  const a = TEAM_ABBR[team] || team.slice(0,3).toUpperCase();
-  return `<div class="team-badge" style="width:${size}px;height:${size}px;background:${c};font-size:${size*.3}px">${a}</div>`;
-}
-function probBar(pct, type='black', maxP=100) {
-  const maxW = 52;
-  const w = pct > 0 ? Math.max(Math.round((pct/maxP)*maxW), 2) : 0;
-  const fmt = pct === 0 ? '<span style="color:var(--gray3)">—</span>' : `${pct.toFixed(1)}%`;
-  return `<div class="prob-bar-wrap"><div class="prob-bar ${type}" style="width:${w}px"></div><span class="prob-val">${fmt}</span></div>`;
-}
-function formGuide(form) {
-  return '<div class="form-guide">' + form.map(r=>`<div class="form-sq ${r}">${r}</div>`).join('') + '</div>';
-}
+const ordinal = n => {
+  const s=['th','st','nd','rd'], v=n%100;
+  return n+(s[(v-20)%10]||s[v]||s[0]);
+};
 
-const data = SITE_DATA;
-const tbody = document.getElementById('teamsBody');
-const maxTitle = Math.max(...data.projection.map(t=>t.titlePct));
-const maxTop4  = Math.max(...data.projection.map(t=>t.top4Pct));
-const maxTop6  = Math.max(...data.projection.map(t=>t.top6Pct));
-const maxRel   = Math.max(...data.projection.map(t=>t.relegPct));
+document.getElementById('pageEyebrow').textContent =
+  'ThirtyEight · 2025/26 Premier League · ' + SITE_DATA.lastUpdated;
 
-data.projection.forEach((t) => {
-  const pos = t.pos;
-  const zone = pos<=4?'zone-cl':pos<=6?'zone-el':pos>=18?'zone-rel':'zone-none';
-  const isLeader = pos===1?'zone-leader':'';
-  const tr = document.createElement('tr');
-  tr.className = `${zone} ${isLeader}`;
-  tr.style.cursor = 'pointer';
-  tr.onclick = () => window.location.href = `team.html?team=${encodeURIComponent(t.team)}`;
-  tr.innerHTML = `
-    <td>${pos}</td>
-    <td>
-      <div class="team-cell">
-        ${badge(t.team)}
-        <span class="team-name">${t.team}</span>
+const grid = document.getElementById('teamsGrid');
+
+SITE_DATA.projection.forEach(t => {
+  const abbr  = TEAM_ABBR[t.team] || t.team.slice(0,3).toUpperCase();
+  const color = TEAM_COLORS[t.team] || '#111';
+
+  // Zone class
+  const zoneClass = t.pos<=4 ? 'zone-cl' : t.pos<=6 ? 'zone-el' : t.pos>=18 ? 'zone-rel' : '';
+
+  // Decide which probability to highlight
+  let statLabel, statVal, statColor;
+  if (t.titlePct >= 5) {
+    statLabel = 'Title probability';
+    statVal   = t.titlePct.toFixed(1) + '%';
+    statColor = 'gold';
+  } else if (t.top4Pct >= 15 || t.pos <= 6) {
+    statLabel = 'Champions League';
+    statVal   = t.top4Pct.toFixed(1) + '%';
+    statColor = 'purple';
+  } else if (t.relegPct >= 10 || t.pos >= 15) {
+    statLabel = 'Relegation risk';
+    statVal   = t.relegPct.toFixed(1) + '%';
+    statColor = 'red';
+  } else {
+    statLabel = 'Top 6 probability';
+    statVal   = t.top6Pct.toFixed(1) + '%';
+    statColor = 'teal';
+  }
+
+  // Bar width — scale to max across all teams for same stat
+  const rawPct = parseFloat(statVal);
+  const barPct = Math.min(rawPct, 100);
+
+  // Next fixture
+  const fixtures = SITE_DATA.teamFixtures[t.team] || [];
+  const next = fixtures[0];
+  const nextHtml = next
+    ? `<span class="tc-next-ha">${next.ha}</span> ${next.opponent} GW${next.gw}`
+    : 'Season complete';
+
+  // Form
+  const formHtml = t.form.map(r =>
+    `<div class="form-sq ${r}" style="width:13px;height:13px;font-size:0.5rem">${r}</div>`
+  ).join('');
+
+  const card = document.createElement('a');
+  card.className = `team-card ${zoneClass}`;
+  card.href = `team.html?team=${encodeURIComponent(t.team)}`;
+  card.innerHTML = `
+    <div class="tc-header">
+      <div class="tc-badge" style="background:${color}">${abbr}</div>
+      <div class="tc-name-block">
+        <div class="tc-name">${t.team}</div>
+        <div class="tc-subline">${t.played} played · ${t.remaining} left</div>
       </div>
-    </td>
-    <td class="mono-cell">${t.played}</td>
-    <td class="mono-cell" style="font-weight:700">${t.currentPts}</td>
-    <td class="hide-mobile" style="text-align:center">
-      <div class="proj-inline">
-        <span class="p-lo">${t.projMin}</span><span class="sep">·</span>
-        <span class="p-med">${t.projMed}</span><span class="sep">·</span>
-        <span class="p-hi">${t.projMax}</span>
+      <div class="tc-pos">${t.pos}</div>
+    </div>
+
+    <div class="tc-pts-row">
+      <span class="tc-pts-num">${t.currentPts}</span>
+      <span class="tc-pts-lbl">pts</span>
+      <div class="tc-proj">
+        <div style="font-size:0.58rem;margin-bottom:1px">Proj final pts</div>
+        <div><span style="color:var(--gray4)">${t.projMin}</span> · <strong>${t.projMed}</strong> · <span style="color:var(--gray4)">${t.projMax}</span></div>
       </div>
-    </td>
-    <td class="prob-bar-cell">${probBar(t.titlePct,'gold',maxTitle||100)}</td>
-    <td class="prob-bar-cell hide-mobile">${probBar(t.top4Pct,'purple',maxTop4||100)}</td>
-    <td class="prob-bar-cell hide-mobile">${probBar(t.top6Pct,'teal',maxTop6||100)}</td>
-    <td class="prob-bar-cell">${probBar(t.relegPct,'red',maxRel||100)}</td>
-    <td class="hide-mobile hide-tablet">${formGuide(t.form)}</td>
+    </div>
+
+    <div class="tc-stat-row">
+      <div class="tc-stat-label">
+        <span>${statLabel}</span>
+        <span class="tc-stat-val ${statColor}">${statVal}</span>
+      </div>
+      <div class="tc-bar-track">
+        <div class="tc-bar-fill ${statColor}" style="width:0%" data-target="${barPct}%"></div>
+      </div>
+    </div>
+
+    <div class="tc-footer">
+      <div class="form-guide" style="gap:2px">${formHtml}</div>
+      <div class="tc-next">Next: ${nextHtml}</div>
+    </div>
   `;
-  tbody.appendChild(tr);
+  grid.appendChild(card);
 });
 
-// Zone legend
-const legend = document.createElement('tr');
-legend.innerHTML = `<td colspan="10" style="padding:1.25rem 0.5rem 0.5rem;font-family:var(--fontMono);font-size:0.65rem;color:var(--gray5)">
-  <span style="border-left:3px solid #6666ff;padding-left:6px;margin-right:1.5rem">Champions League</span>
-  <span style="border-left:3px solid var(--teal);padding-left:6px;margin-right:1.5rem">Europa League</span>
-  <span style="border-left:3px solid var(--lossRed);padding-left:6px">Relegation</span>
-</td>`;
-tbody.appendChild(legend);
-
-// Animate bars
+// Animate bars on load
 window.addEventListener('load', () => {
-  document.querySelectorAll('.prob-bar').forEach(b => {
-    const w = b.style.width; b.style.width='0';
-    setTimeout(() => { b.style.width = w; }, 80);
+  document.querySelectorAll('.tc-bar-fill[data-target]').forEach((el, i) => {
+    setTimeout(() => {
+      el.style.width = el.dataset.target;
+    }, 60 + i * 30);
   });
 });
 
