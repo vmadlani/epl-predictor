@@ -889,6 +889,92 @@ a:hover { text-decoration: underline; }
   .hide-tablet { display: none !important; }
 }
 
+/* --- NEWSLETTER BAND ---------------------------------------------------- */
+.newsletter-band {
+  background: var(--black);
+  color: #fff;
+  padding: 2rem 2rem;
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.nl-left { flex: 1; min-width: 200px; }
+.nl-right { flex: 1; min-width: 220px; }
+.nl-eyebrow {
+  font-family: var(--fontMono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 0.4rem;
+}
+.nl-heading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+.nl-sub {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+}
+.nl-form {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0.5rem;
+}
+.nl-input {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  font-family: var(--fontMono);
+  font-size: 0.82rem;
+  border: 1px solid #444;
+  border-right: none;
+  background: #1a1a1a;
+  color: #fff;
+  outline: none;
+  min-width: 0;
+}
+.nl-input::placeholder { color: #555; }
+.nl-input:focus { border-color: var(--brand); }
+.nl-btn {
+  padding: 0.6rem 1.1rem;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  font-family: var(--fontMono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.12s;
+  white-space: nowrap;
+}
+.nl-btn:hover { background: var(--brandDark); }
+.nl-confirm {
+  font-family: var(--fontMono);
+  font-size: 0.78rem;
+  color: #52b788;
+  padding: 0.6rem 0;
+}
+.nl-meta {
+  font-family: var(--fontMono);
+  font-size: 0.6rem;
+  color: #444;
+  letter-spacing: 0.04em;
+}
+@media (max-width: 640px) {
+  .newsletter-band { padding: 1.5rem 1.25rem; gap: 1.5rem; }
+  .nl-form { flex-direction: column; }
+  .nl-input { border-right: 1px solid #444; border-bottom: none; }
+  .nl-btn { width: 100%; }
+}
+
 /* Animations */
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .animate-in { animation: fadeIn 0.25s ease; }

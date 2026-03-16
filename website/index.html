@@ -142,6 +142,29 @@
     </div>
   </section>
 
+  <!-- NEWSLETTER SIGNUP -->
+  <section class="section">
+    <div class="newsletter-band">
+      <div class="nl-left">
+        <div class="nl-eyebrow">The Gameweek Report</div>
+        <div class="nl-heading">Get the numbers in your inbox.</div>
+        <div class="nl-sub">Every Monday after the gameweek — updated probabilities, what shifted, and what to watch next. No fluff.</div>
+      </div>
+      <div class="nl-right">
+        <!-- Replace the form below with your Beehiiv embed once you have an account -->
+        <!-- Sign up at beehiiv.com, create a publication, then go to Settings → Forms → Embed -->
+        <form class="nl-form" id="nlForm" onsubmit="nlSubmit(event)">
+          <input class="nl-input" type="email" placeholder="your@email.com" required id="nlEmail">
+          <button class="nl-btn" type="submit">Subscribe</button>
+        </form>
+        <div class="nl-confirm" id="nlConfirm" style="display:none">
+          ✓ You're on the list. First issue lands Monday.
+        </div>
+        <div class="nl-meta">Weekly · No spam · Unsubscribe any time</div>
+      </div>
+    </div>
+  </section>
+
 </div>
 </main>
 
@@ -382,6 +405,13 @@ window.addEventListener('load', () => {
 document.getElementById('navToggle').addEventListener('click', () => {
   document.getElementById('mainNav').classList.toggle('open');
 });
+
+// Newsletter form — swap this function out when you add the Beehiiv embed
+function nlSubmit(e) {
+  e.preventDefault();
+  document.getElementById('nlForm').style.display = 'none';
+  document.getElementById('nlConfirm').style.display = 'block';
+}
 </script>
 </body>
 </html>
