@@ -42,18 +42,6 @@ from scipy.stats import poisson
 #   - You don't need to remove old GWs — played matches are filtered out
 
 GW_SCHEDULE = {
-    31: [   # 14-16 Mar
-        ("Burnley",        "Bournemouth"),
-        ("Sunderland",     "Brighton"),
-        ("Arsenal",        "Everton"),
-        ("Chelsea",        "Newcastle"),
-        ("West Ham",       "Man City"),
-        ("Crystal Palace", "Leeds"),
-        ("Man United",     "Aston Villa"),
-        ("Nott'm Forest",  "Fulham"),
-        ("Liverpool",      "Tottenham"),
-        ("Brentford",      "Wolves"),
-    ],
     32: [   # 20-22 Mar (Arsenal & Wolves blank — FA Cup; Man City vs Crystal Palace PP)
         ("Bournemouth",    "Man United"),
         ("Brighton",       "Liverpool"),
