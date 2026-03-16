@@ -40,17 +40,15 @@ OUTPUTS_FOLDER = "outputs"
 # Tip: check outputs/team_ratings.csv for the exact spelling.
 #
 FIXTURES = [
-    # Matchweek 29 -- 14-16 March 2026
-    ("Sunderland",    "Brighton",       "2026-03-14"),
-    ("Burnley",       "Bournemouth",    "2026-03-14"),
-    ("Chelsea",       "Newcastle",      "2026-03-14"),
-    ("Arsenal",       "Everton",        "2026-03-14"),
-    ("West Ham",      "Man City",       "2026-03-14"),
-    ("Nott'm Forest", "Fulham",         "2026-03-15"),
-    ("Man United",    "Aston Villa",    "2026-03-15"),
-    ("Crystal Palace","Leeds",          "2026-03-15"),
-    ("Liverpool",     "Tottenham",      "2026-03-15"),
-    ("Brentford",     "Wolves",         "2026-03-16"),
+    # Matchweek 32 -- 20-22 March 2026
+    ("Bournemouth",   "Man United",     "2026-03-20"),
+    ("Brighton",      "Liverpool",      "2026-03-20"),
+    ("Fulham",        "Burnley",        "2026-03-20"),
+    ("Everton",       "Chelsea",        "2026-03-20"),
+    ("Leeds",         "Brentford",      "2026-03-21"),
+    ("Newcastle",     "Sunderland",     "2026-03-21"),
+    ("Aston Villa",   "West Ham",       "2026-03-21"),
+    ("Tottenham",     "Nott'm Forest",  "2026-03-22"),
 ]
 # -----------------------------------------------------------------------------
 
