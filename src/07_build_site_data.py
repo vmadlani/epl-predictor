@@ -484,12 +484,16 @@ def main():
     print(f"  [OK] {len(projection)} teams loaded.")
 
     # ------------------------------------------------------------------
-    # Step 3 — Load remaining fixtures
+    # Step 3 — Load remaining fixtures (filter out already-played matches)
     # ------------------------------------------------------------------
     print("\n[Step 3] Loading remaining fixtures...")
     with open(f"{OUTPUTS_DIR}/remaining_fixtures.json") as f:
         all_remaining = json.load(f)
-    print(f"  [OK] {len(all_remaining)} remaining fixtures.")
+    played_pairs = set(zip(df_played['HomeTeam'], df_played['AwayTeam']))
+    before = len(all_remaining)
+    all_remaining = [f for f in all_remaining
+                     if (f['HomeTeam'], f['AwayTeam']) not in played_pairs]
+    print(f"  [OK] {len(all_remaining)} remaining fixtures ({before - len(all_remaining)} already played, filtered out).")
 
     # ------------------------------------------------------------------
     # Step 4 — Build next GW section from schedule
@@ -508,12 +512,19 @@ def main():
     print(f"  [OK] {len(gw_fixtures)} fixtures matched.")
 
     # ------------------------------------------------------------------
-    # Step 5 — Build team fixtures (sorted by GW schedule)
+    # Step 5 — Build team fixtures (sorted by GW schedule, played filtered out)
     # ------------------------------------------------------------------
     print("\n[Step 5] Building team fixtures...")
     detail_df = pd.read_csv(f"{OUTPUTS_DIR}/team_fixture_detail.csv")
-    team_fixtures = build_team_fixtures(detail_df, GW_SCHEDULE)
-    print(f"  [OK] {len(team_fixtures)} teams (sorted by schedule).")
+    # Filter out fixtures already played (Team=home, Opponent=away or vice versa via HA)
+    def is_played(row):
+        if row['HA'] == 'H':
+            return (row['Team'], row['Opponent']) in played_pairs
+        else:
+            return (row['Opponent'], row['Team']) in played_pairs
+    before_detail = len(detail_df)
+    detail_df = detail_df[~detail_df.apply(is_played, axis=1)]
+    print(f"  [OK] {len(team_fixtures := build_team_fixtures(detail_df, GW_SCHEDULE))} teams ({before_detail - len(detail_df)} played rows filtered out, sorted by schedule).")
 
     # ------------------------------------------------------------------
     # Step 6 — Build ratings
