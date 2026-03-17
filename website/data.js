@@ -12,7 +12,7 @@ const SITE_DATA = {
       "projMin": 81,
       "projMed": 85,
       "projMax": 89,
-      "titlePct": 96.6,
+      "titlePct": 96.5,
       "top4Pct": 100.0,
       "top6Pct": 100.0,
       "relegPct": 0.0,
@@ -30,10 +30,10 @@ const SITE_DATA = {
       "currentPts": 61,
       "played": 30,
       "remaining": 8,
-      "projMin": 71,
+      "projMin": 72,
       "projMed": 76,
       "projMax": 80,
-      "titlePct": 3.4,
+      "titlePct": 3.5,
       "top4Pct": 100.0,
       "top6Pct": 100.0,
       "relegPct": 0.0,
@@ -55,8 +55,8 @@ const SITE_DATA = {
       "projMed": 65,
       "projMax": 70,
       "titlePct": 0.0,
-      "top4Pct": 76.3,
-      "top6Pct": 97.0,
+      "top4Pct": 76.5,
+      "top6Pct": 97.4,
       "relegPct": 0.0,
       "form": [
         "W",
@@ -72,12 +72,12 @@ const SITE_DATA = {
       "currentPts": 51,
       "played": 30,
       "remaining": 8,
-      "projMin": 59,
+      "projMin": 58,
       "projMed": 63,
       "projMax": 68,
       "titlePct": 0.0,
-      "top4Pct": 50.5,
-      "top6Pct": 90.5,
+      "top4Pct": 50.9,
+      "top6Pct": 92.1,
       "relegPct": 0.0,
       "form": [
         "L",
@@ -93,12 +93,12 @@ const SITE_DATA = {
       "currentPts": 49,
       "played": 30,
       "remaining": 8,
-      "projMin": 57,
+      "projMin": 58,
       "projMed": 62,
       "projMax": 67,
       "titlePct": 0.0,
-      "top4Pct": 40.6,
-      "top6Pct": 83.2,
+      "top4Pct": 42.7,
+      "top6Pct": 86.5,
       "relegPct": 0.0,
       "form": [
         "D",
@@ -118,8 +118,8 @@ const SITE_DATA = {
       "projMed": 61,
       "projMax": 65,
       "titlePct": 0.0,
-      "top4Pct": 24.6,
-      "top6Pct": 72.4,
+      "top4Pct": 25.5,
+      "top6Pct": 75.3,
       "relegPct": 0.0,
       "form": [
         "L",
@@ -132,22 +132,22 @@ const SITE_DATA = {
     {
       "team": "Brentford",
       "pos": 7,
-      "currentPts": 44,
-      "played": 29,
-      "remaining": 9,
+      "currentPts": 45,
+      "played": 30,
+      "remaining": 8,
       "projMin": 52,
-      "projMed": 57,
-      "projMax": 62,
+      "projMed": 56,
+      "projMax": 61,
       "titlePct": 0.0,
-      "top4Pct": 6.7,
-      "top6Pct": 34.2,
+      "top4Pct": 3.0,
+      "top6Pct": 24.0,
       "relegPct": 0.0,
       "form": [
         "D",
+        "D",
         "W",
         "L",
-        "D",
-        "W"
+        "D"
       ]
     },
     {
@@ -156,12 +156,12 @@ const SITE_DATA = {
       "currentPts": 42,
       "played": 30,
       "remaining": 8,
-      "projMin": 50,
+      "projMin": 49,
       "projMed": 54,
       "projMax": 59,
       "titlePct": 0.0,
       "top4Pct": 0.6,
-      "top6Pct": 8.8,
+      "top6Pct": 9.8,
       "relegPct": 0.0,
       "form": [
         "W",
@@ -181,8 +181,8 @@ const SITE_DATA = {
       "projMed": 53,
       "projMax": 57,
       "titlePct": 0.0,
-      "top4Pct": 0.3,
-      "top6Pct": 5.7,
+      "top4Pct": 0.4,
+      "top6Pct": 6.0,
       "relegPct": 0.0,
       "form": [
         "L",
@@ -203,7 +203,7 @@ const SITE_DATA = {
       "projMax": 56,
       "titlePct": 0.0,
       "top4Pct": 0.2,
-      "top6Pct": 3.4,
+      "top6Pct": 3.6,
       "relegPct": 0.0,
       "form": [
         "W",
@@ -242,7 +242,7 @@ const SITE_DATA = {
       "remaining": 8,
       "projMin": 47,
       "projMed": 51,
-      "projMax": 56,
+      "projMax": 55,
       "titlePct": 0.0,
       "top4Pct": 0.1,
       "top6Pct": 2.4,
@@ -266,7 +266,7 @@ const SITE_DATA = {
       "projMax": 54,
       "titlePct": 0.0,
       "top4Pct": 0.0,
-      "top6Pct": 0.9,
+      "top6Pct": 1.0,
       "relegPct": 0.0,
       "form": [
         "L",
@@ -287,7 +287,7 @@ const SITE_DATA = {
       "projMax": 52,
       "titlePct": 0.0,
       "top4Pct": 0.0,
-      "top6Pct": 0.1,
+      "top6Pct": 0.3,
       "relegPct": 0.1,
       "form": [
         "D",
@@ -309,7 +309,7 @@ const SITE_DATA = {
       "titlePct": 0.0,
       "top4Pct": 0.0,
       "top6Pct": 0.0,
-      "relegPct": 5.4,
+      "relegPct": 4.8,
       "form": [
         "D",
         "L",
@@ -330,7 +330,7 @@ const SITE_DATA = {
       "titlePct": 0.0,
       "top4Pct": 0.0,
       "top6Pct": 0.0,
-      "relegPct": 16.8,
+      "relegPct": 17.2,
       "form": [
         "D",
         "L",
@@ -372,7 +372,7 @@ const SITE_DATA = {
       "titlePct": 0.0,
       "top4Pct": 0.0,
       "top6Pct": 0.0,
-      "relegPct": 49.1,
+      "relegPct": 49.3,
       "form": [
         "D",
         "W",
@@ -393,7 +393,7 @@ const SITE_DATA = {
       "titlePct": 0.0,
       "top4Pct": 0.0,
       "top6Pct": 0.0,
-      "relegPct": 99.8,
+      "relegPct": 99.7,
       "form": [
         "D",
         "L",
@@ -405,21 +405,21 @@ const SITE_DATA = {
     {
       "team": "Wolves",
       "pos": 20,
-      "currentPts": 16,
-      "played": 30,
-      "remaining": 8,
-      "projMin": 20,
-      "projMed": 24,
+      "currentPts": 17,
+      "played": 31,
+      "remaining": 7,
+      "projMin": 21,
+      "projMed": 25,
       "projMax": 29,
       "titlePct": 0.0,
       "top4Pct": 0.0,
       "top6Pct": 0.0,
-      "relegPct": 99.9,
+      "relegPct": 100.0,
       "form": [
+        "D",
         "W",
         "W",
         "L",
-        "D",
         "D"
       ]
     }
@@ -5703,46 +5703,6 @@ const SITE_DATA = {
           "4-3": 0.92,
           "4-4": 0.3
         }
-      },
-      {
-        "gw": 99,
-        "ha": "H",
-        "opponent": "Wolves",
-        "xgFor": 1.94,
-        "xgAgainst": 0.94,
-        "predFor": 1,
-        "predAgainst": 1,
-        "winPct": 59.6,
-        "drawPct": 23.6,
-        "lossPct": 16.8,
-        "expPts": 2.02,
-        "scoreMatrix": {
-          "0-0": 6.63,
-          "0-1": 4.31,
-          "0-2": 2.49,
-          "0-3": 0.78,
-          "0-4": 0.18,
-          "1-0": 9.91,
-          "1-1": 11.25,
-          "1-2": 4.83,
-          "1-3": 1.51,
-          "1-4": 0.36,
-          "2-0": 10.55,
-          "2-1": 9.93,
-          "2-2": 4.67,
-          "2-3": 1.47,
-          "2-4": 0.34,
-          "3-0": 6.81,
-          "3-1": 6.41,
-          "3-2": 3.01,
-          "3-3": 0.95,
-          "3-4": 0.22,
-          "4-0": 3.29,
-          "4-1": 3.1,
-          "4-2": 1.46,
-          "4-3": 0.46,
-          "4-4": 0.11
-        }
       }
     ],
     "Everton": [
@@ -6064,328 +6024,6 @@ const SITE_DATA = {
           "4-2": 0.62,
           "4-3": 0.26,
           "4-4": 0.08
-        }
-      }
-    ],
-    "Wolves": [
-      {
-        "gw": 33,
-        "ha": "A",
-        "opponent": "West Ham",
-        "xgFor": 1.16,
-        "xgAgainst": 1.53,
-        "predFor": 1,
-        "predAgainst": 1,
-        "winPct": 27.6,
-        "drawPct": 27.7,
-        "lossPct": 44.8,
-        "expPts": 1.1,
-        "scoreMatrix": {
-          "0-0": 7.94,
-          "0-1": 6.68,
-          "0-2": 4.55,
-          "0-3": 1.75,
-          "0-4": 0.51,
-          "1-0": 9.23,
-          "1-1": 13.2,
-          "1-2": 6.97,
-          "1-3": 2.69,
-          "1-4": 0.78,
-          "2-0": 7.97,
-          "2-1": 9.23,
-          "2-2": 5.34,
-          "2-3": 2.06,
-          "2-4": 0.6,
-          "3-0": 4.07,
-          "3-1": 4.72,
-          "3-2": 2.73,
-          "3-3": 1.05,
-          "3-4": 0.31,
-          "4-0": 1.56,
-          "4-1": 1.81,
-          "4-2": 1.05,
-          "4-3": 0.4,
-          "4-4": 0.12
-        }
-      },
-      {
-        "gw": 34,
-        "ha": "A",
-        "opponent": "Leeds",
-        "xgFor": 1.06,
-        "xgAgainst": 1.71,
-        "predFor": 1,
-        "predAgainst": 1,
-        "winPct": 22.5,
-        "drawPct": 26.2,
-        "lossPct": 51.3,
-        "expPts": 0.94,
-        "scoreMatrix": {
-          "0-0": 7.36,
-          "0-1": 5.56,
-          "0-2": 3.54,
-          "0-3": 1.26,
-          "0-4": 0.33,
-          "1-0": 9.58,
-          "1-1": 12.47,
-          "1-2": 6.05,
-          "1-3": 2.15,
-          "1-4": 0.57,
-          "2-0": 9.11,
-          "2-1": 9.7,
-          "2-2": 5.17,
-          "2-3": 1.83,
-          "2-4": 0.49,
-          "3-0": 5.19,
-          "3-1": 5.52,
-          "3-2": 2.94,
-          "3-3": 1.04,
-          "3-4": 0.28,
-          "4-0": 2.21,
-          "4-1": 2.36,
-          "4-2": 1.25,
-          "4-3": 0.45,
-          "4-4": 0.12
-        }
-      },
-      {
-        "gw": 35,
-        "ha": "H",
-        "opponent": "Tottenham",
-        "xgFor": 1.31,
-        "xgAgainst": 1.53,
-        "predFor": 1,
-        "predAgainst": 1,
-        "winPct": 31.5,
-        "drawPct": 27.2,
-        "lossPct": 41.3,
-        "expPts": 1.22,
-        "scoreMatrix": {
-          "0-0": 7.0,
-          "0-1": 7.82,
-          "0-2": 6.85,
-          "0-3": 3.49,
-          "0-4": 1.33,
-          "1-0": 6.54,
-          "1-1": 12.86,
-          "1-2": 8.96,
-          "1-3": 4.56,
-          "1-4": 1.74,
-          "2-0": 5.02,
-          "2-1": 7.67,
-          "2-2": 5.86,
-          "2-3": 2.98,
-          "2-4": 1.14,
-          "3-0": 2.19,
-          "3-1": 3.34,
-          "3-2": 2.56,
-          "3-3": 1.3,
-          "3-4": 0.5,
-          "4-0": 0.72,
-          "4-1": 1.09,
-          "4-2": 0.84,
-          "4-3": 0.43,
-          "4-4": 0.16
-        }
-      },
-      {
-        "gw": 36,
-        "ha": "H",
-        "opponent": "Sunderland",
-        "xgFor": 0.87,
-        "xgAgainst": 1.09,
-        "predFor": 0,
-        "predAgainst": 0,
-        "winPct": 27.5,
-        "drawPct": 33.5,
-        "lossPct": 39.1,
-        "expPts": 1.16,
-        "scoreMatrix": {
-          "0-0": 15.29,
-          "0-1": 14.01,
-          "0-2": 8.37,
-          "0-3": 3.05,
-          "0-4": 0.83,
-          "1-0": 10.93,
-          "1-1": 14.65,
-          "1-2": 7.3,
-          "1-3": 2.66,
-          "1-4": 0.73,
-          "2-0": 5.33,
-          "2-1": 5.83,
-          "2-2": 3.19,
-          "2-3": 1.16,
-          "2-4": 0.32,
-          "3-0": 1.55,
-          "3-1": 1.7,
-          "3-2": 0.93,
-          "3-3": 0.34,
-          "3-4": 0.09,
-          "4-0": 0.34,
-          "4-1": 0.37,
-          "4-2": 0.2,
-          "4-3": 0.07,
-          "4-4": 0.02
-        }
-      },
-      {
-        "gw": 37,
-        "ha": "A",
-        "opponent": "Brighton",
-        "xgFor": 0.91,
-        "xgAgainst": 1.77,
-        "predFor": 1,
-        "predAgainst": 1,
-        "winPct": 18.0,
-        "drawPct": 25.4,
-        "lossPct": 56.7,
-        "expPts": 0.79,
-        "scoreMatrix": {
-          "0-0": 7.97,
-          "0-1": 5.18,
-          "0-2": 2.83,
-          "0-3": 0.85,
-          "0-4": 0.19,
-          "1-0": 11.13,
-          "1-1": 12.11,
-          "1-2": 5.0,
-          "1-3": 1.51,
-          "1-4": 0.34,
-          "2-0": 10.78,
-          "2-1": 9.77,
-          "2-2": 4.42,
-          "2-3": 1.34,
-          "2-4": 0.3,
-          "3-0": 6.36,
-          "3-1": 5.76,
-          "3-2": 2.61,
-          "3-3": 0.79,
-          "3-4": 0.18,
-          "4-0": 2.81,
-          "4-1": 2.55,
-          "4-2": 1.15,
-          "4-3": 0.35,
-          "4-4": 0.08
-        }
-      },
-      {
-        "gw": 38,
-        "ha": "H",
-        "opponent": "Fulham",
-        "xgFor": 1.14,
-        "xgAgainst": 1.48,
-        "predFor": 1,
-        "predAgainst": 1,
-        "winPct": 27.9,
-        "drawPct": 28.2,
-        "lossPct": 43.9,
-        "expPts": 1.12,
-        "scoreMatrix": {
-          "0-0": 8.47,
-          "0-1": 9.6,
-          "0-2": 7.99,
-          "0-3": 3.95,
-          "0-4": 1.46,
-          "1-0": 7.1,
-          "1-1": 13.47,
-          "1-2": 9.1,
-          "1-3": 4.49,
-          "1-4": 1.66,
-          "2-0": 4.72,
-          "2-1": 6.99,
-          "2-2": 5.18,
-          "2-3": 2.56,
-          "2-4": 0.95,
-          "3-0": 1.79,
-          "3-1": 2.65,
-          "3-2": 1.97,
-          "3-3": 0.97,
-          "3-4": 0.36,
-          "4-0": 0.51,
-          "4-1": 0.76,
-          "4-2": 0.56,
-          "4-3": 0.28,
-          "4-4": 0.1
-        }
-      },
-      {
-        "gw": 39,
-        "ha": "A",
-        "opponent": "Burnley",
-        "xgFor": 1.31,
-        "xgAgainst": 1.39,
-        "predFor": 1,
-        "predAgainst": 1,
-        "winPct": 33.9,
-        "drawPct": 28.2,
-        "lossPct": 37.9,
-        "expPts": 1.3,
-        "scoreMatrix": {
-          "0-0": 7.9,
-          "0-1": 7.59,
-          "0-2": 5.73,
-          "0-3": 2.5,
-          "0-4": 0.82,
-          "1-0": 8.18,
-          "1-1": 13.42,
-          "1-2": 7.99,
-          "1-3": 3.48,
-          "1-4": 1.14,
-          "2-0": 6.53,
-          "2-1": 8.53,
-          "2-2": 5.57,
-          "2-3": 2.43,
-          "2-4": 0.79,
-          "3-0": 3.03,
-          "3-1": 3.96,
-          "3-2": 2.59,
-          "3-3": 1.13,
-          "3-4": 0.37,
-          "4-0": 1.06,
-          "4-1": 1.38,
-          "4-2": 0.9,
-          "4-3": 0.39,
-          "4-4": 0.13
-        }
-      },
-      {
-        "gw": 99,
-        "ha": "A",
-        "opponent": "Brentford",
-        "xgFor": 0.94,
-        "xgAgainst": 1.94,
-        "predFor": 1,
-        "predAgainst": 1,
-        "winPct": 16.8,
-        "drawPct": 23.6,
-        "lossPct": 59.6,
-        "expPts": 0.74,
-        "scoreMatrix": {
-          "0-0": 6.63,
-          "0-1": 4.31,
-          "0-2": 2.49,
-          "0-3": 0.78,
-          "0-4": 0.18,
-          "1-0": 9.91,
-          "1-1": 11.25,
-          "1-2": 4.83,
-          "1-3": 1.51,
-          "1-4": 0.36,
-          "2-0": 10.55,
-          "2-1": 9.93,
-          "2-2": 4.67,
-          "2-3": 1.47,
-          "2-4": 0.34,
-          "3-0": 6.81,
-          "3-1": 6.41,
-          "3-2": 3.01,
-          "3-3": 0.95,
-          "3-4": 0.22,
-          "4-0": 3.29,
-          "4-1": 3.1,
-          "4-2": 1.46,
-          "4-3": 0.46,
-          "4-4": 0.11
         }
       }
     ],
@@ -7033,6 +6671,288 @@ const SITE_DATA = {
         }
       }
     ],
+    "Wolves": [
+      {
+        "gw": 33,
+        "ha": "A",
+        "opponent": "West Ham",
+        "xgFor": 1.16,
+        "xgAgainst": 1.53,
+        "predFor": 1,
+        "predAgainst": 1,
+        "winPct": 27.6,
+        "drawPct": 27.7,
+        "lossPct": 44.8,
+        "expPts": 1.1,
+        "scoreMatrix": {
+          "0-0": 7.94,
+          "0-1": 6.68,
+          "0-2": 4.55,
+          "0-3": 1.75,
+          "0-4": 0.51,
+          "1-0": 9.23,
+          "1-1": 13.2,
+          "1-2": 6.97,
+          "1-3": 2.69,
+          "1-4": 0.78,
+          "2-0": 7.97,
+          "2-1": 9.23,
+          "2-2": 5.34,
+          "2-3": 2.06,
+          "2-4": 0.6,
+          "3-0": 4.07,
+          "3-1": 4.72,
+          "3-2": 2.73,
+          "3-3": 1.05,
+          "3-4": 0.31,
+          "4-0": 1.56,
+          "4-1": 1.81,
+          "4-2": 1.05,
+          "4-3": 0.4,
+          "4-4": 0.12
+        }
+      },
+      {
+        "gw": 34,
+        "ha": "A",
+        "opponent": "Leeds",
+        "xgFor": 1.06,
+        "xgAgainst": 1.71,
+        "predFor": 1,
+        "predAgainst": 1,
+        "winPct": 22.5,
+        "drawPct": 26.2,
+        "lossPct": 51.3,
+        "expPts": 0.94,
+        "scoreMatrix": {
+          "0-0": 7.36,
+          "0-1": 5.56,
+          "0-2": 3.54,
+          "0-3": 1.26,
+          "0-4": 0.33,
+          "1-0": 9.58,
+          "1-1": 12.47,
+          "1-2": 6.05,
+          "1-3": 2.15,
+          "1-4": 0.57,
+          "2-0": 9.11,
+          "2-1": 9.7,
+          "2-2": 5.17,
+          "2-3": 1.83,
+          "2-4": 0.49,
+          "3-0": 5.19,
+          "3-1": 5.52,
+          "3-2": 2.94,
+          "3-3": 1.04,
+          "3-4": 0.28,
+          "4-0": 2.21,
+          "4-1": 2.36,
+          "4-2": 1.25,
+          "4-3": 0.45,
+          "4-4": 0.12
+        }
+      },
+      {
+        "gw": 35,
+        "ha": "H",
+        "opponent": "Tottenham",
+        "xgFor": 1.31,
+        "xgAgainst": 1.53,
+        "predFor": 1,
+        "predAgainst": 1,
+        "winPct": 31.5,
+        "drawPct": 27.2,
+        "lossPct": 41.3,
+        "expPts": 1.22,
+        "scoreMatrix": {
+          "0-0": 7.0,
+          "0-1": 7.82,
+          "0-2": 6.85,
+          "0-3": 3.49,
+          "0-4": 1.33,
+          "1-0": 6.54,
+          "1-1": 12.86,
+          "1-2": 8.96,
+          "1-3": 4.56,
+          "1-4": 1.74,
+          "2-0": 5.02,
+          "2-1": 7.67,
+          "2-2": 5.86,
+          "2-3": 2.98,
+          "2-4": 1.14,
+          "3-0": 2.19,
+          "3-1": 3.34,
+          "3-2": 2.56,
+          "3-3": 1.3,
+          "3-4": 0.5,
+          "4-0": 0.72,
+          "4-1": 1.09,
+          "4-2": 0.84,
+          "4-3": 0.43,
+          "4-4": 0.16
+        }
+      },
+      {
+        "gw": 36,
+        "ha": "H",
+        "opponent": "Sunderland",
+        "xgFor": 0.87,
+        "xgAgainst": 1.09,
+        "predFor": 0,
+        "predAgainst": 0,
+        "winPct": 27.5,
+        "drawPct": 33.5,
+        "lossPct": 39.1,
+        "expPts": 1.16,
+        "scoreMatrix": {
+          "0-0": 15.29,
+          "0-1": 14.01,
+          "0-2": 8.37,
+          "0-3": 3.05,
+          "0-4": 0.83,
+          "1-0": 10.93,
+          "1-1": 14.65,
+          "1-2": 7.3,
+          "1-3": 2.66,
+          "1-4": 0.73,
+          "2-0": 5.33,
+          "2-1": 5.83,
+          "2-2": 3.19,
+          "2-3": 1.16,
+          "2-4": 0.32,
+          "3-0": 1.55,
+          "3-1": 1.7,
+          "3-2": 0.93,
+          "3-3": 0.34,
+          "3-4": 0.09,
+          "4-0": 0.34,
+          "4-1": 0.37,
+          "4-2": 0.2,
+          "4-3": 0.07,
+          "4-4": 0.02
+        }
+      },
+      {
+        "gw": 37,
+        "ha": "A",
+        "opponent": "Brighton",
+        "xgFor": 0.91,
+        "xgAgainst": 1.77,
+        "predFor": 1,
+        "predAgainst": 1,
+        "winPct": 18.0,
+        "drawPct": 25.4,
+        "lossPct": 56.7,
+        "expPts": 0.79,
+        "scoreMatrix": {
+          "0-0": 7.97,
+          "0-1": 5.18,
+          "0-2": 2.83,
+          "0-3": 0.85,
+          "0-4": 0.19,
+          "1-0": 11.13,
+          "1-1": 12.11,
+          "1-2": 5.0,
+          "1-3": 1.51,
+          "1-4": 0.34,
+          "2-0": 10.78,
+          "2-1": 9.77,
+          "2-2": 4.42,
+          "2-3": 1.34,
+          "2-4": 0.3,
+          "3-0": 6.36,
+          "3-1": 5.76,
+          "3-2": 2.61,
+          "3-3": 0.79,
+          "3-4": 0.18,
+          "4-0": 2.81,
+          "4-1": 2.55,
+          "4-2": 1.15,
+          "4-3": 0.35,
+          "4-4": 0.08
+        }
+      },
+      {
+        "gw": 38,
+        "ha": "H",
+        "opponent": "Fulham",
+        "xgFor": 1.14,
+        "xgAgainst": 1.48,
+        "predFor": 1,
+        "predAgainst": 1,
+        "winPct": 27.9,
+        "drawPct": 28.2,
+        "lossPct": 43.9,
+        "expPts": 1.12,
+        "scoreMatrix": {
+          "0-0": 8.47,
+          "0-1": 9.6,
+          "0-2": 7.99,
+          "0-3": 3.95,
+          "0-4": 1.46,
+          "1-0": 7.1,
+          "1-1": 13.47,
+          "1-2": 9.1,
+          "1-3": 4.49,
+          "1-4": 1.66,
+          "2-0": 4.72,
+          "2-1": 6.99,
+          "2-2": 5.18,
+          "2-3": 2.56,
+          "2-4": 0.95,
+          "3-0": 1.79,
+          "3-1": 2.65,
+          "3-2": 1.97,
+          "3-3": 0.97,
+          "3-4": 0.36,
+          "4-0": 0.51,
+          "4-1": 0.76,
+          "4-2": 0.56,
+          "4-3": 0.28,
+          "4-4": 0.1
+        }
+      },
+      {
+        "gw": 39,
+        "ha": "A",
+        "opponent": "Burnley",
+        "xgFor": 1.31,
+        "xgAgainst": 1.39,
+        "predFor": 1,
+        "predAgainst": 1,
+        "winPct": 33.9,
+        "drawPct": 28.2,
+        "lossPct": 37.9,
+        "expPts": 1.3,
+        "scoreMatrix": {
+          "0-0": 7.9,
+          "0-1": 7.59,
+          "0-2": 5.73,
+          "0-3": 2.5,
+          "0-4": 0.82,
+          "1-0": 8.18,
+          "1-1": 13.42,
+          "1-2": 7.99,
+          "1-3": 3.48,
+          "1-4": 1.14,
+          "2-0": 6.53,
+          "2-1": 8.53,
+          "2-2": 5.57,
+          "2-3": 2.43,
+          "2-4": 0.79,
+          "3-0": 3.03,
+          "3-1": 3.96,
+          "3-2": 2.59,
+          "3-3": 1.13,
+          "3-4": 0.37,
+          "4-0": 1.06,
+          "4-1": 1.38,
+          "4-2": 0.9,
+          "4-3": 0.39,
+          "4-4": 0.13
+        }
+      }
+    ],
     "Nott'm Forest": [
       {
         "gw": 32,
@@ -7359,249 +7279,245 @@ const SITE_DATA = {
   "ratings": [
     {
       "team": "Man City",
-      "attack": 0.414,
-      "defence": -0.1746,
-      "expScored": 1.513,
-      "expConceded": 0.84
+      "attack": 0.4131,
+      "defence": -0.1736,
+      "expScored": 1.512,
+      "expConceded": 0.841
     },
     {
       "team": "Arsenal",
-      "attack": 0.4133,
-      "defence": -0.386,
-      "expScored": 1.512,
+      "attack": 0.4118,
+      "defence": -0.3852,
+      "expScored": 1.51,
       "expConceded": 0.68
     },
     {
       "team": "Liverpool",
-      "attack": 0.3612,
-      "defence": 0.0781,
-      "expScored": 1.435,
-      "expConceded": 1.081
+      "attack": 0.3604,
+      "defence": 0.079,
+      "expScored": 1.434,
+      "expConceded": 1.082
     },
     {
       "team": "Chelsea",
-      "attack": 0.2826,
-      "defence": 0.034,
-      "expScored": 1.327,
-      "expConceded": 1.035
+      "attack": 0.2813,
+      "defence": 0.035,
+      "expScored": 1.325,
+      "expConceded": 1.036
     },
     {
       "team": "Newcastle",
-      "attack": 0.2525,
-      "defence": 0.1819,
-      "expScored": 1.287,
-      "expConceded": 1.199
+      "attack": 0.2511,
+      "defence": 0.1829,
+      "expScored": 1.285,
+      "expConceded": 1.201
     },
     {
       "team": "Brentford",
-      "attack": 0.2085,
-      "defence": 0.1856,
-      "expScored": 1.232,
-      "expConceded": 1.204
+      "attack": 0.2091,
+      "defence": 0.2063,
+      "expScored": 1.233,
+      "expConceded": 1.229
     },
     {
       "team": "Man United",
-      "attack": 0.2068,
-      "defence": 0.1527,
-      "expScored": 1.23,
-      "expConceded": 1.165
+      "attack": 0.2059,
+      "defence": 0.1536,
+      "expScored": 1.229,
+      "expConceded": 1.166
     },
     {
       "team": "Aston Villa",
-      "attack": 0.1168,
-      "defence": 0.0862,
-      "expScored": 1.124,
-      "expConceded": 1.09
+      "attack": 0.1153,
+      "defence": 0.087,
+      "expScored": 1.122,
+      "expConceded": 1.091
     },
     {
       "team": "Bournemouth",
-      "attack": 0.1144,
-      "defence": 0.2158,
-      "expScored": 1.121,
-      "expConceded": 1.241
+      "attack": 0.1129,
+      "defence": 0.2168,
+      "expScored": 1.12,
+      "expConceded": 1.242
     },
     {
       "team": "Brighton",
-      "attack": 0.1122,
-      "defence": 0.124,
-      "expScored": 1.119,
-      "expConceded": 1.132
+      "attack": 0.1109,
+      "defence": 0.1253,
+      "expScored": 1.117,
+      "expConceded": 1.134
     },
     {
       "team": "Tottenham",
-      "attack": 0.1077,
-      "defence": 0.3484,
-      "expScored": 1.114,
-      "expConceded": 1.417
+      "attack": 0.1065,
+      "defence": 0.3499,
+      "expScored": 1.112,
+      "expConceded": 1.419
     },
     {
       "team": "Fulham",
-      "attack": 0.0585,
-      "defence": 0.2081,
-      "expScored": 1.06,
-      "expConceded": 1.231
+      "attack": 0.0576,
+      "defence": 0.2095,
+      "expScored": 1.059,
+      "expConceded": 1.233
     },
     {
       "team": "Luton",
-      "attack": 0.0543,
-      "defence": 0.6551,
-      "expScored": 1.056,
-      "expConceded": 1.925
+      "attack": 0.053,
+      "defence": 0.6562,
+      "expScored": 1.054,
+      "expConceded": 1.928
     },
     {
       "team": "Leeds",
-      "attack": 0.0423,
-      "defence": 0.2736,
-      "expScored": 1.043,
-      "expConceded": 1.315
+      "attack": 0.0416,
+      "defence": 0.2752,
+      "expScored": 1.042,
+      "expConceded": 1.317
     },
     {
       "team": "West Ham",
-      "attack": -0.0254,
-      "defence": 0.3739,
-      "expScored": 0.975,
-      "expConceded": 1.453
+      "attack": -0.0262,
+      "defence": 0.3752,
+      "expScored": 0.974,
+      "expConceded": 1.455
     },
     {
       "team": "Crystal Palace",
-      "attack": -0.0512,
-      "defence": 0.091,
-      "expScored": 0.95,
-      "expConceded": 1.095
+      "attack": -0.0522,
+      "defence": 0.0918,
+      "expScored": 0.949,
+      "expConceded": 1.096
     },
     {
       "team": "Nott'm Forest",
-      "attack": -0.116,
-      "defence": 0.1448,
-      "expScored": 0.89,
-      "expConceded": 1.156
+      "attack": -0.1172,
+      "defence": 0.1457,
+      "expScored": 0.889,
+      "expConceded": 1.157
     },
     {
       "team": "Everton",
-      "attack": -0.1487,
-      "defence": -0.0315,
-      "expScored": 0.862,
-      "expConceded": 0.969
+      "attack": -0.1496,
+      "defence": -0.0303,
+      "expScored": 0.861,
+      "expConceded": 0.97
     },
     {
       "team": "Burnley",
-      "attack": -0.1596,
-      "defence": 0.4799,
-      "expScored": 0.853,
-      "expConceded": 1.616
+      "attack": -0.1611,
+      "defence": 0.4814,
+      "expScored": 0.851,
+      "expConceded": 1.618
     },
     {
       "team": "Wolves",
-      "attack": -0.2354,
-      "defence": 0.3218,
-      "expScored": 0.79,
-      "expConceded": 1.38
+      "attack": -0.2097,
+      "defence": 0.3245,
+      "expScored": 0.811,
+      "expConceded": 1.383
     },
     {
       "team": "Sunderland",
-      "attack": -0.27,
-      "defence": -0.0357,
-      "expScored": 0.763,
-      "expConceded": 0.965
+      "attack": -0.2713,
+      "defence": -0.0341,
+      "expScored": 0.762,
+      "expConceded": 0.966
     },
     {
       "team": "Sheffield United",
-      "attack": -0.334,
-      "defence": 0.826,
-      "expScored": 0.716,
-      "expConceded": 2.284
+      "attack": -0.3352,
+      "defence": 0.8272,
+      "expScored": 0.715,
+      "expConceded": 2.287
     },
     {
       "team": "Ipswich",
-      "attack": -0.3388,
-      "defence": 0.6336,
-      "expScored": 0.713,
-      "expConceded": 1.884
+      "attack": -0.3401,
+      "defence": 0.6346,
+      "expScored": 0.712,
+      "expConceded": 1.886
     },
     {
       "team": "Leicester",
-      "attack": -0.4659,
-      "defence": 0.5572,
-      "expScored": 0.628,
-      "expConceded": 1.746
+      "attack": -0.4671,
+      "defence": 0.5582,
+      "expScored": 0.627,
+      "expConceded": 1.748
     },
     {
       "team": "Southampton",
-      "attack": -0.6001,
-      "defence": 0.6545,
-      "expScored": 0.549,
-      "expConceded": 1.924
+      "attack": -0.6009,
+      "defence": 0.6556,
+      "expScored": 0.548,
+      "expConceded": 1.926
     }
   ],
   "teamHist": {
     "Arsenal": [
-      {
-        "pts": 73,
-        "count": 1
-      },
       {
         "pts": 74,
         "count": 2
       },
       {
         "pts": 75,
-        "count": 9
+        "count": 12
       },
       {
         "pts": 76,
-        "count": 16
+        "count": 22
       },
       {
         "pts": 77,
-        "count": 62
+        "count": 55
       },
       {
         "pts": 78,
-        "count": 97
+        "count": 109
       },
       {
         "pts": 79,
-        "count": 176
+        "count": 187
       },
       {
         "pts": 80,
-        "count": 333
+        "count": 386
       },
       {
         "pts": 81,
-        "count": 548
+        "count": 527
       },
       {
         "pts": 82,
-        "count": 701
+        "count": 691
       },
       {
         "pts": 83,
-        "count": 1002
+        "count": 1037
       },
       {
         "pts": 84,
-        "count": 1289
+        "count": 1291
       },
       {
         "pts": 85,
-        "count": 1106
+        "count": 1079
       },
       {
         "pts": 86,
-        "count": 1470
+        "count": 1422
       },
       {
         "pts": 87,
-        "count": 1097
+        "count": 1083
       },
       {
         "pts": 88,
-        "count": 741
+        "count": 719
       },
       {
         "pts": 89,
-        "count": 965
+        "count": 995
       },
       {
         "pts": 90,
@@ -7609,97 +7525,97 @@ const SITE_DATA = {
       },
       {
         "pts": 91,
-        "count": 385
+        "count": 383
       }
     ],
     "Aston Villa": [
       {
         "pts": 52,
-        "count": 1
+        "count": 10
       },
       {
         "pts": 53,
-        "count": 15
+        "count": 14
       },
       {
         "pts": 54,
-        "count": 34
+        "count": 30
       },
       {
         "pts": 55,
-        "count": 90
+        "count": 92
       },
       {
         "pts": 56,
-        "count": 140
+        "count": 170
       },
       {
         "pts": 57,
-        "count": 290
+        "count": 287
       },
       {
         "pts": 58,
-        "count": 416
+        "count": 444
       },
       {
         "pts": 59,
-        "count": 607
+        "count": 587
       },
       {
         "pts": 60,
-        "count": 734
+        "count": 752
       },
       {
         "pts": 61,
-        "count": 954
+        "count": 1027
       },
       {
         "pts": 62,
-        "count": 1140
+        "count": 1022
       },
       {
         "pts": 63,
-        "count": 1037
+        "count": 1061
       },
       {
         "pts": 64,
-        "count": 1109
+        "count": 1091
       },
       {
         "pts": 65,
-        "count": 987
+        "count": 985
       },
       {
         "pts": 66,
-        "count": 708
+        "count": 681
       },
       {
         "pts": 67,
-        "count": 668
+        "count": 692
       },
       {
         "pts": 68,
-        "count": 445
+        "count": 449
       },
       {
         "pts": 69,
-        "count": 262
+        "count": 230
       },
       {
         "pts": 70,
-        "count": 217
+        "count": 226
       },
       {
         "pts": 71,
-        "count": 80
+        "count": 73
       },
       {
         "pts": 72,
-        "count": 37
+        "count": 38
       },
       {
         "pts": 73,
-        "count": 26
+        "count": 34
       },
       {
         "pts": 74,
@@ -7707,309 +7623,293 @@ const SITE_DATA = {
       },
       {
         "pts": 75,
-        "count": 3
+        "count": 5
       }
     ],
     "Bournemouth": [
       {
         "pts": 41,
-        "count": 11
+        "count": 8
       },
       {
         "pts": 42,
-        "count": 57
+        "count": 39
       },
       {
         "pts": 43,
-        "count": 105
+        "count": 95
       },
       {
         "pts": 44,
-        "count": 189
+        "count": 173
       },
       {
         "pts": 45,
-        "count": 348
+        "count": 364
       },
       {
         "pts": 46,
-        "count": 526
+        "count": 535
       },
       {
         "pts": 47,
-        "count": 698
+        "count": 682
       },
       {
         "pts": 48,
-        "count": 873
+        "count": 952
       },
       {
         "pts": 49,
-        "count": 1036
+        "count": 1084
       },
       {
         "pts": 50,
-        "count": 1069
+        "count": 1019
       },
       {
         "pts": 51,
-        "count": 1115
+        "count": 1073
       },
       {
         "pts": 52,
-        "count": 1033
+        "count": 1055
       },
       {
         "pts": 53,
-        "count": 810
+        "count": 885
       },
       {
         "pts": 54,
-        "count": 777
+        "count": 696
       },
       {
         "pts": 55,
-        "count": 495
+        "count": 500
       },
       {
         "pts": 56,
-        "count": 338
+        "count": 350
       },
       {
         "pts": 57,
-        "count": 232
+        "count": 239
       },
       {
         "pts": 58,
-        "count": 135
+        "count": 126
       },
       {
         "pts": 59,
-        "count": 72
+        "count": 59
       },
       {
         "pts": 60,
-        "count": 55
+        "count": 46
       },
       {
         "pts": 61,
-        "count": 10
+        "count": 11
       },
       {
         "pts": 62,
-        "count": 6
+        "count": 7
       },
       {
         "pts": 63,
-        "count": 9
-      },
-      {
-        "pts": 64,
-        "count": 0
-      },
-      {
-        "pts": 65,
-        "count": 1
+        "count": 2
       }
     ],
     "Brentford": [
       {
+        "pts": 45,
+        "count": 1
+      },
+      {
         "pts": 46,
-        "count": 8
+        "count": 5
       },
       {
         "pts": 47,
-        "count": 19
+        "count": 27
       },
       {
         "pts": 48,
-        "count": 40
+        "count": 88
       },
       {
         "pts": 49,
-        "count": 83
+        "count": 167
       },
       {
         "pts": 50,
-        "count": 169
+        "count": 262
       },
       {
         "pts": 51,
-        "count": 273
+        "count": 443
       },
       {
         "pts": 52,
-        "count": 425
+        "count": 609
       },
       {
         "pts": 53,
-        "count": 564
+        "count": 849
       },
       {
         "pts": 54,
-        "count": 722
+        "count": 894
       },
       {
         "pts": 55,
-        "count": 938
+        "count": 1092
       },
       {
         "pts": 56,
-        "count": 928
+        "count": 1134
       },
       {
         "pts": 57,
-        "count": 1044
+        "count": 957
       },
       {
         "pts": 58,
-        "count": 1028
+        "count": 990
       },
       {
         "pts": 59,
-        "count": 911
+        "count": 816
       },
       {
         "pts": 60,
-        "count": 801
+        "count": 537
       },
       {
         "pts": 61,
-        "count": 728
+        "count": 521
       },
       {
         "pts": 62,
-        "count": 456
+        "count": 261
       },
       {
         "pts": 63,
-        "count": 364
+        "count": 149
       },
       {
         "pts": 64,
-        "count": 232
+        "count": 118
       },
       {
         "pts": 65,
-        "count": 127
+        "count": 38
       },
       {
         "pts": 66,
-        "count": 79
+        "count": 21
       },
       {
         "pts": 67,
-        "count": 22
+        "count": 19
       },
       {
         "pts": 68,
-        "count": 26
-      },
-      {
-        "pts": 69,
-        "count": 12
-      },
-      {
-        "pts": 70,
         "count": 0
       },
       {
-        "pts": 71,
-        "count": 1
+        "pts": 69,
+        "count": 2
       }
     ],
     "Brighton": [
       {
-        "pts": 40,
-        "count": 1
-      },
-      {
         "pts": 41,
-        "count": 6
+        "count": 7
       },
       {
         "pts": 42,
-        "count": 29
+        "count": 27
       },
       {
         "pts": 43,
-        "count": 45
+        "count": 53
       },
       {
         "pts": 44,
-        "count": 115
+        "count": 138
       },
       {
         "pts": 45,
-        "count": 190
+        "count": 226
       },
       {
         "pts": 46,
-        "count": 330
+        "count": 312
       },
       {
         "pts": 47,
-        "count": 517
+        "count": 512
       },
       {
         "pts": 48,
-        "count": 724
+        "count": 667
       },
       {
         "pts": 49,
-        "count": 805
+        "count": 840
       },
       {
         "pts": 50,
-        "count": 996
+        "count": 1037
       },
       {
         "pts": 51,
-        "count": 1053
+        "count": 1086
       },
       {
         "pts": 52,
-        "count": 1034
+        "count": 967
       },
       {
         "pts": 53,
-        "count": 1035
+        "count": 1018
       },
       {
         "pts": 54,
-        "count": 914
+        "count": 952
       },
       {
         "pts": 55,
-        "count": 648
+        "count": 636
       },
       {
         "pts": 56,
-        "count": 577
+        "count": 591
       },
       {
         "pts": 57,
-        "count": 395
+        "count": 393
       },
       {
         "pts": 58,
-        "count": 233
+        "count": 204
       },
       {
         "pts": 59,
-        "count": 191
+        "count": 188
       },
       {
         "pts": 60,
-        "count": 79
+        "count": 77
       },
       {
         "pts": 61,
-        "count": 45
+        "count": 38
       },
       {
         "pts": 62,
-        "count": 37
+        "count": 26
       },
       {
         "pts": 63,
@@ -8017,81 +7917,81 @@ const SITE_DATA = {
       },
       {
         "pts": 64,
-        "count": 1
+        "count": 5
       }
     ],
     "Burnley": [
       {
         "pts": 20,
-        "count": 96
+        "count": 84
       },
       {
         "pts": 21,
-        "count": 333
+        "count": 349
       },
       {
         "pts": 22,
-        "count": 518
+        "count": 523
       },
       {
         "pts": 23,
-        "count": 799
+        "count": 780
       },
       {
         "pts": 24,
-        "count": 1140
+        "count": 1158
       },
       {
         "pts": 25,
-        "count": 1176
+        "count": 1217
       },
       {
         "pts": 26,
-        "count": 1169
+        "count": 1159
       },
       {
         "pts": 27,
-        "count": 1234
+        "count": 1278
       },
       {
         "pts": 28,
-        "count": 1039
+        "count": 986
       },
       {
         "pts": 29,
-        "count": 813
+        "count": 743
       },
       {
         "pts": 30,
-        "count": 633
+        "count": 662
       },
       {
         "pts": 31,
-        "count": 434
+        "count": 426
       },
       {
         "pts": 32,
-        "count": 260
+        "count": 270
       },
       {
         "pts": 33,
-        "count": 172
+        "count": 185
       },
       {
         "pts": 34,
-        "count": 86
+        "count": 95
       },
       {
         "pts": 35,
-        "count": 46
+        "count": 38
       },
       {
         "pts": 36,
-        "count": 28
+        "count": 32
       },
       {
         "pts": 37,
-        "count": 14
+        "count": 8
       },
       {
         "pts": 38,
@@ -8099,17 +7999,13 @@ const SITE_DATA = {
       },
       {
         "pts": 39,
-        "count": 5
-      },
-      {
-        "pts": 40,
-        "count": 1
+        "count": 3
       }
     ],
     "Chelsea": [
       {
         "pts": 49,
-        "count": 6
+        "count": 4
       },
       {
         "pts": 50,
@@ -8117,83 +8013,83 @@ const SITE_DATA = {
       },
       {
         "pts": 51,
-        "count": 25
+        "count": 24
       },
       {
         "pts": 52,
-        "count": 51
+        "count": 77
       },
       {
         "pts": 53,
-        "count": 138
+        "count": 121
       },
       {
         "pts": 54,
-        "count": 171
+        "count": 231
       },
       {
         "pts": 55,
-        "count": 332
+        "count": 327
       },
       {
         "pts": 56,
-        "count": 544
+        "count": 524
       },
       {
         "pts": 57,
-        "count": 706
+        "count": 687
       },
       {
         "pts": 58,
-        "count": 874
+        "count": 875
       },
       {
         "pts": 59,
-        "count": 974
+        "count": 971
       },
       {
         "pts": 60,
-        "count": 987
+        "count": 1004
       },
       {
         "pts": 61,
-        "count": 1091
+        "count": 1111
       },
       {
         "pts": 62,
-        "count": 1102
+        "count": 1024
       },
       {
         "pts": 63,
-        "count": 763
+        "count": 785
       },
       {
         "pts": 64,
-        "count": 754
+        "count": 718
       },
       {
         "pts": 65,
-        "count": 619
+        "count": 644
       },
       {
         "pts": 66,
-        "count": 319
+        "count": 298
       },
       {
         "pts": 67,
-        "count": 295
+        "count": 304
       },
       {
         "pts": 68,
-        "count": 120
+        "count": 128
       },
       {
         "pts": 69,
-        "count": 62
+        "count": 63
       },
       {
         "pts": 70,
-        "count": 50
+        "count": 60
       },
       {
         "pts": 71,
@@ -8201,73 +8097,73 @@ const SITE_DATA = {
       },
       {
         "pts": 72,
-        "count": 7
+        "count": 10
       }
     ],
     "Crystal Palace": [
       {
         "pts": 39,
-        "count": 10
+        "count": 3
       },
       {
         "pts": 40,
-        "count": 55
+        "count": 66
       },
       {
         "pts": 41,
-        "count": 122
+        "count": 131
       },
       {
         "pts": 42,
-        "count": 265
+        "count": 244
       },
       {
         "pts": 43,
-        "count": 476
+        "count": 455
       },
       {
         "pts": 44,
-        "count": 644
+        "count": 694
       },
       {
         "pts": 45,
-        "count": 820
+        "count": 828
       },
       {
         "pts": 46,
-        "count": 1111
+        "count": 1024
       },
       {
         "pts": 47,
-        "count": 1162
+        "count": 1145
       },
       {
         "pts": 48,
-        "count": 1123
+        "count": 1088
       },
       {
         "pts": 49,
-        "count": 1089
+        "count": 1066
       },
       {
         "pts": 50,
-        "count": 904
+        "count": 915
       },
       {
         "pts": 51,
-        "count": 709
+        "count": 742
       },
       {
         "pts": 52,
-        "count": 572
+        "count": 622
       },
       {
         "pts": 53,
-        "count": 370
+        "count": 384
       },
       {
         "pts": 54,
-        "count": 257
+        "count": 274
       },
       {
         "pts": 55,
@@ -8275,117 +8171,129 @@ const SITE_DATA = {
       },
       {
         "pts": 56,
-        "count": 85
+        "count": 87
       },
       {
         "pts": 57,
-        "count": 39
+        "count": 41
       },
       {
         "pts": 58,
-        "count": 23
+        "count": 32
       },
       {
         "pts": 59,
-        "count": 8
+        "count": 4
       },
       {
         "pts": 60,
-        "count": 2
+        "count": 0
+      },
+      {
+        "pts": 61,
+        "count": 1
       }
     ],
     "Everton": [
       {
         "pts": 43,
-        "count": 6
+        "count": 5
       },
       {
         "pts": 44,
-        "count": 32
+        "count": 35
       },
       {
         "pts": 45,
-        "count": 86
+        "count": 90
       },
       {
         "pts": 46,
-        "count": 164
+        "count": 153
       },
       {
         "pts": 47,
-        "count": 294
+        "count": 301
       },
       {
         "pts": 48,
-        "count": 514
+        "count": 454
       },
       {
         "pts": 49,
-        "count": 644
+        "count": 694
       },
       {
         "pts": 50,
-        "count": 871
+        "count": 876
       },
       {
         "pts": 51,
-        "count": 1104
+        "count": 1065
       },
       {
         "pts": 52,
-        "count": 1068
+        "count": 1063
       },
       {
         "pts": 53,
-        "count": 1068
+        "count": 1077
       },
       {
         "pts": 54,
-        "count": 1078
+        "count": 1077
       },
       {
         "pts": 55,
-        "count": 869
+        "count": 873
       },
       {
         "pts": 56,
-        "count": 707
+        "count": 728
       },
       {
         "pts": 57,
-        "count": 568
+        "count": 592
       },
       {
         "pts": 58,
-        "count": 367
+        "count": 366
       },
       {
         "pts": 59,
-        "count": 249
+        "count": 226
       },
       {
         "pts": 60,
-        "count": 162
+        "count": 171
       },
       {
         "pts": 61,
-        "count": 70
+        "count": 72
       },
       {
         "pts": 62,
-        "count": 49
+        "count": 48
       },
       {
         "pts": 63,
-        "count": 24
+        "count": 17
       },
       {
         "pts": 64,
-        "count": 4
+        "count": 13
       },
       {
         "pts": 65,
-        "count": 2
+        "count": 3
+      },
+      {
+        "pts": 66,
+        "count": 0
+      },
+      {
+        "pts": 67,
+        "count": 1
       }
     ],
     "Fulham": [
@@ -8395,83 +8303,83 @@ const SITE_DATA = {
       },
       {
         "pts": 42,
-        "count": 31
+        "count": 34
       },
       {
         "pts": 43,
-        "count": 76
+        "count": 60
       },
       {
         "pts": 44,
-        "count": 146
+        "count": 124
       },
       {
         "pts": 45,
-        "count": 238
+        "count": 289
       },
       {
         "pts": 46,
-        "count": 450
+        "count": 435
       },
       {
         "pts": 47,
-        "count": 611
+        "count": 614
       },
       {
         "pts": 48,
-        "count": 810
+        "count": 815
       },
       {
         "pts": 49,
-        "count": 1054
+        "count": 945
       },
       {
         "pts": 50,
-        "count": 1015
+        "count": 1073
       },
       {
         "pts": 51,
-        "count": 1131
+        "count": 1156
       },
       {
         "pts": 52,
-        "count": 1088
+        "count": 1134
       },
       {
         "pts": 53,
-        "count": 832
+        "count": 892
       },
       {
         "pts": 54,
-        "count": 848
+        "count": 896
       },
       {
         "pts": 55,
-        "count": 612
+        "count": 551
       },
       {
         "pts": 56,
-        "count": 384
+        "count": 369
       },
       {
         "pts": 57,
-        "count": 333
+        "count": 298
       },
       {
         "pts": 58,
-        "count": 152
+        "count": 154
       },
       {
         "pts": 59,
-        "count": 90
+        "count": 75
       },
       {
         "pts": 60,
-        "count": 62
+        "count": 58
       },
       {
         "pts": 61,
-        "count": 14
+        "count": 12
       },
       {
         "pts": 62,
@@ -8479,7 +8387,7 @@ const SITE_DATA = {
       },
       {
         "pts": 63,
-        "count": 10
+        "count": 5
       },
       {
         "pts": 64,
@@ -8487,13 +8395,13 @@ const SITE_DATA = {
       },
       {
         "pts": 65,
-        "count": 3
+        "count": 1
       }
     ],
     "Leeds": [
       {
         "pts": 32,
-        "count": 2
+        "count": 3
       },
       {
         "pts": 33,
@@ -8501,79 +8409,79 @@ const SITE_DATA = {
       },
       {
         "pts": 34,
-        "count": 48
+        "count": 41
       },
       {
         "pts": 35,
-        "count": 93
+        "count": 84
       },
       {
         "pts": 36,
-        "count": 166
+        "count": 182
       },
       {
         "pts": 37,
-        "count": 320
+        "count": 318
       },
       {
         "pts": 38,
-        "count": 458
+        "count": 455
       },
       {
         "pts": 39,
-        "count": 662
+        "count": 634
       },
       {
         "pts": 40,
-        "count": 856
+        "count": 862
       },
       {
         "pts": 41,
-        "count": 904
+        "count": 887
       },
       {
         "pts": 42,
-        "count": 1061
+        "count": 1106
       },
       {
         "pts": 43,
-        "count": 1105
+        "count": 1125
       },
       {
         "pts": 44,
-        "count": 1011
+        "count": 919
       },
       {
         "pts": 45,
-        "count": 942
+        "count": 977
       },
       {
         "pts": 46,
-        "count": 740
+        "count": 818
       },
       {
         "pts": 47,
-        "count": 567
+        "count": 524
       },
       {
         "pts": 48,
-        "count": 430
+        "count": 471
       },
       {
         "pts": 49,
-        "count": 293
+        "count": 257
       },
       {
         "pts": 50,
-        "count": 132
+        "count": 141
       },
       {
         "pts": 51,
-        "count": 117
+        "count": 107
       },
       {
         "pts": 52,
-        "count": 45
+        "count": 33
       },
       {
         "pts": 53,
@@ -8581,7 +8489,7 @@ const SITE_DATA = {
       },
       {
         "pts": 54,
-        "count": 11
+        "count": 15
       },
       {
         "pts": 55,
@@ -8589,139 +8497,85 @@ const SITE_DATA = {
       },
       {
         "pts": 56,
-        "count": 2
+        "count": 6
       }
     ],
     "Liverpool": [
       {
-        "pts": 49,
-        "count": 1
-      },
-      {
         "pts": 50,
-        "count": 0
-      },
-      {
-        "pts": 51,
-        "count": 10
-      },
-      {
-        "pts": 52,
-        "count": 20
-      },
-      {
-        "pts": 53,
-        "count": 36
-      },
-      {
-        "pts": 54,
-        "count": 89
-      },
-      {
-        "pts": 55,
-        "count": 157
-      },
-      {
-        "pts": 56,
-        "count": 277
-      },
-      {
-        "pts": 57,
-        "count": 436
-      },
-      {
-        "pts": 58,
-        "count": 553
-      },
-      {
-        "pts": 59,
-        "count": 786
-      },
-      {
-        "pts": 60,
-        "count": 957
-      },
-      {
-        "pts": 61,
-        "count": 993
-      },
-      {
-        "pts": 62,
-        "count": 1042
-      },
-      {
-        "pts": 63,
-        "count": 1062
-      },
-      {
-        "pts": 64,
-        "count": 866
-      },
-      {
-        "pts": 65,
-        "count": 813
-      },
-      {
-        "pts": 66,
-        "count": 641
-      },
-      {
-        "pts": 67,
-        "count": 428
-      },
-      {
-        "pts": 68,
-        "count": 417
-      },
-      {
-        "pts": 69,
-        "count": 194
-      },
-      {
-        "pts": 70,
-        "count": 114
-      },
-      {
-        "pts": 71,
-        "count": 90
-      },
-      {
-        "pts": 72,
-        "count": 0
-      },
-      {
-        "pts": 73,
-        "count": 18
-      }
-    ],
-    "Man City": [
-      {
-        "pts": 62,
-        "count": 1
-      },
-      {
-        "pts": 63,
-        "count": 1
-      },
-      {
-        "pts": 64,
         "count": 2
       },
       {
+        "pts": 51,
+        "count": 3
+      },
+      {
+        "pts": 52,
+        "count": 11
+      },
+      {
+        "pts": 53,
+        "count": 37
+      },
+      {
+        "pts": 54,
+        "count": 85
+      },
+      {
+        "pts": 55,
+        "count": 156
+      },
+      {
+        "pts": 56,
+        "count": 262
+      },
+      {
+        "pts": 57,
+        "count": 432
+      },
+      {
+        "pts": 58,
+        "count": 584
+      },
+      {
+        "pts": 59,
+        "count": 739
+      },
+      {
+        "pts": 60,
+        "count": 917
+      },
+      {
+        "pts": 61,
+        "count": 936
+      },
+      {
+        "pts": 62,
+        "count": 1096
+      },
+      {
+        "pts": 63,
+        "count": 1074
+      },
+      {
+        "pts": 64,
+        "count": 852
+      },
+      {
         "pts": 65,
-        "count": 14
+        "count": 873
       },
       {
         "pts": 66,
-        "count": 33
+        "count": 707
       },
       {
         "pts": 67,
-        "count": 44
+        "count": 392
       },
       {
         "pts": 68,
-        "count": 80
+        "count": 416
       },
       {
         "pts": 69,
@@ -8729,59 +8583,101 @@ const SITE_DATA = {
       },
       {
         "pts": 70,
-        "count": 256
+        "count": 130
       },
       {
         "pts": 71,
-        "count": 412
+        "count": 102
       },
       {
         "pts": 72,
-        "count": 611
+        "count": 0
       },
       {
         "pts": 73,
-        "count": 692
+        "count": 21
+      }
+    ],
+    "Man City": [
+      {
+        "pts": 64,
+        "count": 2
+      },
+      {
+        "pts": 65,
+        "count": 7
+      },
+      {
+        "pts": 66,
+        "count": 22
+      },
+      {
+        "pts": 67,
+        "count": 40
+      },
+      {
+        "pts": 68,
+        "count": 84
+      },
+      {
+        "pts": 69,
+        "count": 147
+      },
+      {
+        "pts": 70,
+        "count": 249
+      },
+      {
+        "pts": 71,
+        "count": 432
+      },
+      {
+        "pts": 72,
+        "count": 543
+      },
+      {
+        "pts": 73,
+        "count": 765
       },
       {
         "pts": 74,
-        "count": 955
+        "count": 962
       },
       {
         "pts": 75,
-        "count": 1091
+        "count": 1122
       },
       {
         "pts": 76,
-        "count": 1088
+        "count": 1019
       },
       {
         "pts": 77,
-        "count": 1110
+        "count": 1147
       },
       {
         "pts": 78,
-        "count": 1071
+        "count": 1058
       },
       {
         "pts": 79,
-        "count": 672
+        "count": 743
       },
       {
         "pts": 80,
-        "count": 740
+        "count": 707
       },
       {
         "pts": 81,
-        "count": 392
+        "count": 408
       },
       {
         "pts": 82,
-        "count": 220
+        "count": 229
       },
       {
         "pts": 83,
-        "count": 276
+        "count": 256
       },
       {
         "pts": 84,
@@ -8789,101 +8685,97 @@ const SITE_DATA = {
       },
       {
         "pts": 85,
-        "count": 66
+        "count": 58
       }
     ],
     "Man United": [
       {
-        "pts": 54,
-        "count": 1
-      },
-      {
         "pts": 55,
-        "count": 10
+        "count": 6
       },
       {
         "pts": 56,
-        "count": 25
+        "count": 31
       },
       {
         "pts": 57,
-        "count": 54
+        "count": 56
       },
       {
         "pts": 58,
-        "count": 127
+        "count": 145
       },
       {
         "pts": 59,
-        "count": 240
+        "count": 222
       },
       {
         "pts": 60,
-        "count": 302
+        "count": 327
       },
       {
         "pts": 61,
-        "count": 538
+        "count": 554
       },
       {
         "pts": 62,
-        "count": 730
+        "count": 709
       },
       {
         "pts": 63,
-        "count": 869
+        "count": 835
       },
       {
         "pts": 64,
-        "count": 1034
+        "count": 1008
       },
       {
         "pts": 65,
-        "count": 1096
+        "count": 1125
       },
       {
         "pts": 66,
-        "count": 1018
+        "count": 987
       },
       {
         "pts": 67,
-        "count": 928
+        "count": 1007
       },
       {
         "pts": 68,
-        "count": 894
+        "count": 870
       },
       {
         "pts": 69,
-        "count": 654
+        "count": 631
       },
       {
         "pts": 70,
-        "count": 560
+        "count": 564
       },
       {
         "pts": 71,
-        "count": 399
+        "count": 366
       },
       {
         "pts": 72,
-        "count": 206
+        "count": 224
       },
       {
         "pts": 73,
-        "count": 180
+        "count": 188
       },
       {
         "pts": 74,
-        "count": 63
+        "count": 67
       },
       {
         "pts": 75,
-        "count": 38
+        "count": 45
       },
       {
         "pts": 76,
-        "count": 31
+        "count": 30
       },
       {
         "pts": 77,
@@ -8896,16 +8788,20 @@ const SITE_DATA = {
     ],
     "Newcastle": [
       {
+        "pts": 42,
+        "count": 1
+      },
+      {
         "pts": 43,
-        "count": 4
+        "count": 3
       },
       {
         "pts": 44,
-        "count": 15
+        "count": 16
       },
       {
         "pts": 45,
-        "count": 49
+        "count": 43
       },
       {
         "pts": 46,
@@ -8913,19 +8809,19 @@ const SITE_DATA = {
       },
       {
         "pts": 47,
-        "count": 163
+        "count": 157
       },
       {
         "pts": 48,
-        "count": 254
+        "count": 279
       },
       {
         "pts": 49,
-        "count": 391
+        "count": 427
       },
       {
         "pts": 50,
-        "count": 617
+        "count": 621
       },
       {
         "pts": 51,
@@ -8933,31 +8829,31 @@ const SITE_DATA = {
       },
       {
         "pts": 52,
-        "count": 1028
+        "count": 938
       },
       {
         "pts": 53,
-        "count": 1090
+        "count": 1081
       },
       {
         "pts": 54,
-        "count": 1031
+        "count": 1010
       },
       {
         "pts": 55,
-        "count": 1110
+        "count": 1097
       },
       {
         "pts": 56,
-        "count": 961
+        "count": 1005
       },
       {
         "pts": 57,
-        "count": 728
+        "count": 749
       },
       {
         "pts": 58,
-        "count": 670
+        "count": 700
       },
       {
         "pts": 59,
@@ -8965,23 +8861,23 @@ const SITE_DATA = {
       },
       {
         "pts": 60,
-        "count": 236
+        "count": 215
       },
       {
         "pts": 61,
-        "count": 206
+        "count": 234
       },
       {
         "pts": 62,
-        "count": 93
+        "count": 81
       },
       {
         "pts": 63,
-        "count": 58
+        "count": 55
       },
       {
         "pts": 64,
-        "count": 31
+        "count": 25
       },
       {
         "pts": 65,
@@ -8989,101 +8885,101 @@ const SITE_DATA = {
       },
       {
         "pts": 66,
-        "count": 4
+        "count": 2
       }
     ],
     "Nott'm Forest": [
       {
         "pts": 29,
-        "count": 6
+        "count": 7
       },
       {
         "pts": 30,
-        "count": 18
+        "count": 32
       },
       {
         "pts": 31,
-        "count": 103
+        "count": 100
       },
       {
         "pts": 32,
-        "count": 166
+        "count": 167
       },
       {
         "pts": 33,
-        "count": 341
+        "count": 344
       },
       {
         "pts": 34,
-        "count": 510
+        "count": 515
       },
       {
         "pts": 35,
-        "count": 680
+        "count": 667
       },
       {
         "pts": 36,
-        "count": 897
+        "count": 879
       },
       {
         "pts": 37,
-        "count": 1042
+        "count": 1050
       },
       {
         "pts": 38,
-        "count": 1073
+        "count": 1094
       },
       {
         "pts": 39,
-        "count": 1133
+        "count": 1047
       },
       {
         "pts": 40,
-        "count": 1043
+        "count": 1115
       },
       {
         "pts": 41,
-        "count": 864
+        "count": 861
       },
       {
         "pts": 42,
-        "count": 715
+        "count": 711
       },
       {
         "pts": 43,
-        "count": 541
+        "count": 523
       },
       {
         "pts": 44,
-        "count": 342
+        "count": 343
       },
       {
         "pts": 45,
-        "count": 230
+        "count": 255
       },
       {
         "pts": 46,
-        "count": 143
+        "count": 148
       },
       {
         "pts": 47,
-        "count": 74
+        "count": 50
       },
       {
         "pts": 48,
-        "count": 49
+        "count": 60
       },
       {
         "pts": 49,
-        "count": 18
+        "count": 17
       },
       {
         "pts": 50,
-        "count": 8
+        "count": 10
       },
       {
         "pts": 51,
-        "count": 3
+        "count": 4
       },
       {
         "pts": 52,
@@ -9097,295 +8993,279 @@ const SITE_DATA = {
     "Sunderland": [
       {
         "pts": 40,
-        "count": 5
+        "count": 4
       },
       {
         "pts": 41,
-        "count": 24
-      },
-      {
-        "pts": 42,
-        "count": 66
-      },
-      {
-        "pts": 43,
-        "count": 172
-      },
-      {
-        "pts": 44,
-        "count": 333
-      },
-      {
-        "pts": 45,
-        "count": 489
-      },
-      {
-        "pts": 46,
-        "count": 702
-      },
-      {
-        "pts": 47,
-        "count": 878
-      },
-      {
-        "pts": 48,
-        "count": 1062
-      },
-      {
-        "pts": 49,
-        "count": 1124
-      },
-      {
-        "pts": 50,
-        "count": 1126
-      },
-      {
-        "pts": 51,
-        "count": 1057
-      },
-      {
-        "pts": 52,
-        "count": 867
-      },
-      {
-        "pts": 53,
-        "count": 728
-      },
-      {
-        "pts": 54,
-        "count": 514
-      },
-      {
-        "pts": 55,
-        "count": 337
-      },
-      {
-        "pts": 56,
-        "count": 212
-      },
-      {
-        "pts": 57,
-        "count": 150
-      },
-      {
-        "pts": 58,
-        "count": 68
-      },
-      {
-        "pts": 59,
-        "count": 58
-      },
-      {
-        "pts": 60,
         "count": 20
       },
       {
+        "pts": 42,
+        "count": 83
+      },
+      {
+        "pts": 43,
+        "count": 148
+      },
+      {
+        "pts": 44,
+        "count": 290
+      },
+      {
+        "pts": 45,
+        "count": 466
+      },
+      {
+        "pts": 46,
+        "count": 673
+      },
+      {
+        "pts": 47,
+        "count": 844
+      },
+      {
+        "pts": 48,
+        "count": 1084
+      },
+      {
+        "pts": 49,
+        "count": 1169
+      },
+      {
+        "pts": 50,
+        "count": 1134
+      },
+      {
+        "pts": 51,
+        "count": 1083
+      },
+      {
+        "pts": 52,
+        "count": 862
+      },
+      {
+        "pts": 53,
+        "count": 678
+      },
+      {
+        "pts": 54,
+        "count": 563
+      },
+      {
+        "pts": 55,
+        "count": 358
+      },
+      {
+        "pts": 56,
+        "count": 241
+      },
+      {
+        "pts": 57,
+        "count": 151
+      },
+      {
+        "pts": 58,
+        "count": 80
+      },
+      {
+        "pts": 59,
+        "count": 40
+      },
+      {
+        "pts": 60,
+        "count": 16
+      },
+      {
         "pts": 61,
-        "count": 5
+        "count": 6
       },
       {
         "pts": 62,
-        "count": 2
-      },
-      {
-        "pts": 63,
-        "count": 0
-      },
-      {
-        "pts": 64,
-        "count": 1
+        "count": 7
       }
     ],
     "Tottenham": [
       {
         "pts": 30,
-        "count": 4
+        "count": 8
       },
       {
         "pts": 31,
-        "count": 33
+        "count": 29
       },
       {
         "pts": 32,
-        "count": 69
+        "count": 75
       },
       {
         "pts": 33,
-        "count": 142
+        "count": 141
       },
       {
         "pts": 34,
-        "count": 283
+        "count": 260
       },
       {
         "pts": 35,
-        "count": 434
+        "count": 464
       },
       {
         "pts": 36,
-        "count": 584
+        "count": 617
       },
       {
         "pts": 37,
-        "count": 799
+        "count": 800
       },
       {
         "pts": 38,
-        "count": 967
+        "count": 935
       },
       {
         "pts": 39,
-        "count": 998
+        "count": 981
       },
       {
         "pts": 40,
-        "count": 1116
+        "count": 1112
       },
       {
         "pts": 41,
-        "count": 1082
+        "count": 1074
       },
       {
         "pts": 42,
-        "count": 921
+        "count": 895
       },
       {
         "pts": 43,
-        "count": 804
+        "count": 803
       },
       {
         "pts": 44,
-        "count": 612
+        "count": 639
       },
       {
         "pts": 45,
-        "count": 399
+        "count": 415
       },
       {
         "pts": 46,
-        "count": 334
+        "count": 344
       },
       {
         "pts": 47,
-        "count": 201
+        "count": 197
       },
       {
         "pts": 48,
-        "count": 97
+        "count": 90
       },
       {
         "pts": 49,
-        "count": 70
+        "count": 80
       },
       {
         "pts": 50,
-        "count": 28
+        "count": 22
       },
       {
         "pts": 51,
-        "count": 9
+        "count": 8
       },
       {
         "pts": 52,
-        "count": 13
-      },
-      {
-        "pts": 53,
-        "count": 0
-      },
-      {
-        "pts": 54,
-        "count": 1
+        "count": 11
       }
     ],
     "West Ham": [
       {
         "pts": 29,
-        "count": 24
+        "count": 18
       },
       {
         "pts": 30,
-        "count": 116
+        "count": 107
       },
       {
         "pts": 31,
-        "count": 198
+        "count": 234
       },
       {
         "pts": 32,
-        "count": 369
+        "count": 408
       },
       {
         "pts": 33,
-        "count": 635
+        "count": 643
       },
       {
         "pts": 34,
-        "count": 876
+        "count": 838
       },
       {
         "pts": 35,
-        "count": 969
+        "count": 979
       },
       {
         "pts": 36,
-        "count": 1188
+        "count": 1224
       },
       {
         "pts": 37,
-        "count": 1209
+        "count": 1167
       },
       {
         "pts": 38,
-        "count": 1012
+        "count": 1069
       },
       {
         "pts": 39,
-        "count": 1007
+        "count": 945
       },
       {
         "pts": 40,
-        "count": 767
+        "count": 818
       },
       {
         "pts": 41,
-        "count": 562
+        "count": 538
       },
       {
         "pts": 42,
-        "count": 471
+        "count": 431
       },
       {
         "pts": 43,
-        "count": 287
+        "count": 242
       },
       {
         "pts": 44,
-        "count": 137
+        "count": 134
       },
       {
         "pts": 45,
-        "count": 100
+        "count": 112
       },
       {
         "pts": 46,
-        "count": 43
+        "count": 46
       },
       {
         "pts": 47,
-        "count": 20
+        "count": 23
       },
       {
         "pts": 48,
-        "count": 7
+        "count": 18
       },
       {
         "pts": 49,
-        "count": 1
+        "count": 2
       },
       {
         "pts": 50,
-        "count": 1
+        "count": 3
       },
       {
         "pts": 51,
@@ -9394,96 +9274,92 @@ const SITE_DATA = {
     ],
     "Wolves": [
       {
-        "pts": 16,
-        "count": 18
-      },
-      {
         "pts": 17,
-        "count": 100
+        "count": 30
       },
       {
         "pts": 18,
-        "count": 220
+        "count": 133
       },
       {
         "pts": 19,
-        "count": 343
+        "count": 274
       },
       {
         "pts": 20,
-        "count": 582
+        "count": 418
       },
       {
         "pts": 21,
-        "count": 865
+        "count": 751
       },
       {
         "pts": 22,
-        "count": 996
+        "count": 984
       },
       {
         "pts": 23,
-        "count": 1165
+        "count": 1070
       },
       {
         "pts": 24,
-        "count": 1103
+        "count": 1193
       },
       {
         "pts": 25,
-        "count": 1072
+        "count": 1185
       },
       {
         "pts": 26,
-        "count": 951
+        "count": 976
       },
       {
         "pts": 27,
-        "count": 821
+        "count": 960
       },
       {
         "pts": 28,
-        "count": 619
+        "count": 740
       },
       {
         "pts": 29,
-        "count": 430
+        "count": 480
       },
       {
         "pts": 30,
-        "count": 275
+        "count": 371
       },
       {
         "pts": 31,
-        "count": 184
+        "count": 217
       },
       {
         "pts": 32,
-        "count": 123
+        "count": 90
       },
       {
         "pts": 33,
-        "count": 75
+        "count": 81
       },
       {
         "pts": 34,
-        "count": 33
+        "count": 29
       },
       {
         "pts": 35,
-        "count": 15
+        "count": 12
       },
       {
         "pts": 36,
-        "count": 5
-      },
-      {
-        "pts": 37,
         "count": 4
       },
       {
+        "pts": 37,
+        "count": 0
+      },
+      {
         "pts": 38,
-        "count": 1
+        "count": 2
       }
     ]
   },
@@ -9495,7 +9371,7 @@ const SITE_DATA = {
     },
     "Aston Villa": {
       "median": 63,
-      "p10": 59,
+      "p10": 58,
       "p90": 68
     },
     "Bournemouth": {
@@ -9504,9 +9380,9 @@ const SITE_DATA = {
       "p90": 55
     },
     "Brentford": {
-      "median": 57,
+      "median": 56,
       "p10": 52,
-      "p90": 62
+      "p90": 61
     },
     "Brighton": {
       "median": 52,
@@ -9536,7 +9412,7 @@ const SITE_DATA = {
     "Fulham": {
       "median": 51,
       "p10": 47,
-      "p90": 56
+      "p90": 55
     },
     "Leeds": {
       "median": 43,
@@ -9545,12 +9421,12 @@ const SITE_DATA = {
     },
     "Liverpool": {
       "median": 62,
-      "p10": 57,
+      "p10": 58,
       "p90": 67
     },
     "Man City": {
       "median": 76,
-      "p10": 71,
+      "p10": 72,
       "p90": 80
     },
     "Man United": {
@@ -9560,7 +9436,7 @@ const SITE_DATA = {
     },
     "Newcastle": {
       "median": 54,
-      "p10": 50,
+      "p10": 49,
       "p90": 59
     },
     "Nott'm Forest": {
@@ -9584,79 +9460,75 @@ const SITE_DATA = {
       "p90": 42
     },
     "Wolves": {
-      "median": 24,
-      "p10": 20,
+      "median": 25,
+      "p10": 21,
       "p90": 29
     }
   },
   "arsenalHist": [
-    {
-      "pts": 73,
-      "count": 1
-    },
     {
       "pts": 74,
       "count": 2
     },
     {
       "pts": 75,
-      "count": 9
+      "count": 12
     },
     {
       "pts": 76,
-      "count": 16
+      "count": 22
     },
     {
       "pts": 77,
-      "count": 62
+      "count": 55
     },
     {
       "pts": 78,
-      "count": 97
+      "count": 109
     },
     {
       "pts": 79,
-      "count": 176
+      "count": 187
     },
     {
       "pts": 80,
-      "count": 333
+      "count": 386
     },
     {
       "pts": 81,
-      "count": 548
+      "count": 527
     },
     {
       "pts": 82,
-      "count": 701
+      "count": 691
     },
     {
       "pts": 83,
-      "count": 1002
+      "count": 1037
     },
     {
       "pts": 84,
-      "count": 1289
+      "count": 1291
     },
     {
       "pts": 85,
-      "count": 1106
+      "count": 1079
     },
     {
       "pts": 86,
-      "count": 1470
+      "count": 1422
     },
     {
       "pts": 87,
-      "count": 1097
+      "count": 1083
     },
     {
       "pts": 88,
-      "count": 741
+      "count": 719
     },
     {
       "pts": 89,
-      "count": 965
+      "count": 995
     },
     {
       "pts": 90,
@@ -9664,7 +9536,7 @@ const SITE_DATA = {
     },
     {
       "pts": 91,
-      "count": 385
+      "count": 383
     }
   ],
   "arsenalHistStats": {
