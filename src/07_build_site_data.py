@@ -162,8 +162,28 @@ def load_results():
     return df
 
 
-def current_gw(df):
-    """Infer the last completed GW from max games played by any team."""
+def current_gw(df, gw_schedule=None):
+    """Infer the last completed GW.
+
+    If gw_schedule is provided, walk through it in order and return the
+    highest GW whose fixtures are all present in the played data.  This
+    handles blank/double gameweeks correctly.
+
+    Falls back to max-games-played if gw_schedule is not supplied or if
+    no scheduled GW has been fully played yet.
+    """
+    played_pairs = set(zip(df['HomeTeam'], df['AwayTeam']))
+
+    if gw_schedule:
+        last_complete = None
+        for gw_num in sorted(gw_schedule.keys()):
+            fixtures = gw_schedule[gw_num]
+            if fixtures and all((h, a) in played_pairs for (h, a) in fixtures):
+                last_complete = gw_num
+        if last_complete is not None:
+            return last_complete
+
+    # fallback
     home = df.groupby('HomeTeam').size()
     away = df.groupby('AwayTeam').size()
     played = home.add(away, fill_value=0)
@@ -471,7 +491,7 @@ def main():
     # ------------------------------------------------------------------
     print("\n[Step 1] Loading raw results...")
     df_played = load_results()
-    gw = current_gw(df_played)
+    gw = current_gw(df_played, GW_SCHEDULE)
     next_gw = gw + 1
     print(f"  [OK] {len(df_played)} played matches. Last completed GW: {gw}. Building data for GW{next_gw}.")
 
@@ -498,14 +518,10 @@ def main():
     # ------------------------------------------------------------------
     # Step 4 — Build next GW section from schedule
     # ------------------------------------------------------------------
-    # Derive the next GW: lowest key in GW_SCHEDULE that has fixtures
-    scheduled_gws = sorted([gw for gw, fx in GW_SCHEDULE.items() if fx])
-    if scheduled_gws:
-        next_gw = scheduled_gws[0]
-        next_gw_fixtures_list = GW_SCHEDULE[next_gw]
-    else:
-        print("  [WARN] GW_SCHEDULE is empty — no fixtures page will be built.")
-        next_gw_fixtures_list = []
+    # Use next_gw already derived from current_gw() above (= last completed + 1)
+    next_gw_fixtures_list = GW_SCHEDULE.get(next_gw, [])
+    if not next_gw_fixtures_list:
+        print("  [WARN] GW_SCHEDULE is empty or missing next GW — no fixtures page will be built.")
 
     print(f"\n[Step 4] Building GW{next_gw} fixture section ({len(next_gw_fixtures_list)} fixtures)...")
     gw_fixtures = build_gw_section(next_gw_fixtures_list, all_remaining)
