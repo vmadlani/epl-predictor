@@ -929,18 +929,23 @@ a:hover { text-decoration: underline; }
 }
 .nl-input {
   flex: 1;
-  padding: 0.6rem 0.75rem;
+  padding: 0.7rem 1rem;
   font-family: var(--fontMono);
   font-size: 0.82rem;
-  border: 1px solid #444;
+  border: 1.5px solid rgba(255,255,255,0.4);
   border-right: none;
-  background: #1a1a1a;
+  background: rgba(255,255,255,0.07);
   color: #fff;
   outline: none;
   min-width: 0;
+  transition: border-color 0.15s, background 0.15s;
 }
-.nl-input::placeholder { color: #555; }
-.nl-input:focus { border-color: var(--brand); }
+.nl-input::placeholder { color: rgba(255,255,255,0.38); }
+.nl-input:focus {
+  border-color: var(--brand);
+  background: rgba(255,255,255,0.11);
+  box-shadow: 0 0 0 3px rgba(232,65,24,0.2);
+}
 .nl-btn {
   padding: 0.6rem 1.1rem;
   background: var(--brand);
@@ -971,7 +976,7 @@ a:hover { text-decoration: underline; }
 @media (max-width: 640px) {
   .newsletter-band { padding: 1.5rem 1.25rem; gap: 1.5rem; }
   .nl-form { flex-direction: column; }
-  .nl-input { border-right: 1px solid #444; border-bottom: none; }
+  .nl-input { border-right: 1.5px solid rgba(255,255,255,0.4); border-bottom: none; }
   .nl-btn { width: 100%; }
 }
 
